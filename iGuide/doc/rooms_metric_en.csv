@@ -1,0 +1,14 @@
+Building,Floor,Room,X[m],Y[m],Area[m²],Perimeter[m],Perimeter Without Openings[m],Wall Area[m²],Wall Area Without Openings[m²],Volume[m³]
+Main Building,MAIN FLOOR,4pc Bath,2.2,2.9,6.3,11.9,11.1,29.0,26.1,15.5
+Main Building,MAIN FLOOR,Bedroom,4.1,4.2,17.1,16.6,15.0,40.4,35.9,41.8
+Main Building,MAIN FLOOR,Bedroom,2.7,4.2,11.4,13.8,12.5,33.8,28.8,27.8
+Main Building,MAIN FLOOR,Breakfast,2.9,1.9,5.5,11.6,7.9,21.2,18.4,10.1
+Main Building,MAIN FLOOR,Dining,3.1,3.7,11.3,9.8,9.0,23.9,17.7,27.5
+Main Building,MAIN FLOOR,Electrical Room,1.2,1.4,1.7,5.3,4.1,12.9,10.5,4.2
+Main Building,MAIN FLOOR,Kitchen,2.9,5.8,14.8,14.5,12.8,35.3,28.6,36.0
+Main Building,MAIN FLOOR,Laundry,2.9,2.7,,11.2,8.4,27.4,20.3,16.7
+Main Building,MAIN FLOOR,Living,9.2,7.0,60.2,31.7,23.2,68.4,50.1,129.6
+Main Building,MAIN FLOOR,Storage,4.3,6.1,26.2,20.8,18.2,50.8,39.4,64.0
+Main Building,2ND FLOOR,3pc Bath,1.7,2.1,3.6,7.6,7.0,17.4,14.8,8.3
+Main Building,2ND FLOOR,Bedroom,3.5,2.9,10.2,12.8,12.1,29.2,25.2,23.2
+Main Building,2ND FLOOR,Primary,3.8,4.2,15.3,15.9,14.0,36.4,29.6,35.1

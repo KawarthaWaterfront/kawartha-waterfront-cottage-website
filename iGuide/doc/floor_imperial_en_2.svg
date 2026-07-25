@@ -1,0 +1,254 @@
+<!--Copyright by Planitar-->
+<svg class="floor" id="floor2" version="1.1" viewBox="-2216.2 -10356.9 9874.3 5619.8" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">.wallitem{shape-rendering:geometricPrecision; stroke:none} .room{shape-rendering:geometricPrecision; stroke:none; fill:#E0E0E0; stroke-width:30} g.grass polygon { fill: url(#grassPattern); } g.pool polygon { fill: url(#poolPattern); } g.walkway polygon { fill: url(#concretePattern); } g.driveway polygon { fill: url(#concretePattern); } .arrows{fill:black; stroke:none} .door-rect{shape-rendering:geometricPrecision; fill:#dfdfdf} .window-rect{shape-rendering:geometricPrecision; fill:#4fb0e2} .wall{shape-rendering:geometricPrecision; fill:black} .ceiling{display:none} .ceiling-line{fill:none; stroke:red; stroke-width:15} .ceiling-beam{shape-rendering:geometricPrecision; fill:red} .halfwall-outline{shape-rendering:geometricPrecision; stroke:black; stroke-width:7; fill:none} .halfwall-fill{shape-rendering:geometricPrecision; stroke:none; fill:#aaa} .dashline{stroke:black; stroke-width:18; stroke-dasharray: 40} .excluded{fill:none} .line{fill:none; stroke:black; stroke-width:15} .premium{display:none} .premium-fixture{display:none} .premium-freestanding{display:none} .dining{fill:#E8DFD1} .pool{fill:#C5E2FA} .storage{fill:#E8DFD1} .office{fill:#FFF1CC} .grass{fill:#EAF5EE} .driveway{fill:#E0E0E0} .laundry{fill:#E8DFD1} .walkway{fill:#E0E0E0} .roof{fill:#999A9D} .bathroom{fill:#C0E6FF} .kitchen{fill:#E6F2EC} .living{fill:#FFF9E3} .utility{fill:#E8DFD1} .garden{fill:#E6DFD1} .bedroom{fill:#FFF1CC}  #rooms.ansi .unfinished{fill:none;} #rooms.ansi .room.unfinished{fill:none;}   .excluded{fill:none;} .room.excluded{fill:none;}   .garden{fill:#E6DFD1 !important;} .room .garden .room{fill:#E6DFD1 !important;}  .roof{fill:#999A9D !important;} .roof .room{fill:#999A9D !important;}  #rooms.ansi .void-space:not(.unfinished){fill:black;} #rooms.ansi .void-space .room:not(.unfinished){fill:black;}  #rooms.ansi .room.void-space:not(.unfinished){fill:black;} #rooms.ansi .room .void-space .room:not(.unfinished){fill:black;}  .void-space:not(.excluded){fill:black;} .void-space .room:not(.excluded){fill:black;}  .room.void-space:not(.excluded){fill:black;} .room .void-space .room:not(.excluded){fill:black;} .arrows{visibility: hidden}#room48 .arrows{visibility: visible}#room50 .arrows{visibility: visible}#room59 .arrows{visibility: visible}#labels g rect{fill: none}</style>
+<defs>
+<pattern height="270" id="concretePattern" patternUnits="userSpaceOnUse" viewBox="0 0 307.3 269.9" width="307">
+<rect fill="#E0E0E0" height="100%" width="100%" x="0" y="0"/>
+<path d="M105 163.6h23.1M5.5 165.6H28.6M35.7 257.3H58.8M186 44h23.1M176.4 269.9h23.1M61.8 77.1H84.9M200.3 192.5h23.1M283.8 108.6h23.1M284.2 0h23.1M0 22.5H23.1M271.3 243.1h23.1" fill="none" stroke="black" stroke-width="4"/>
+</pattern>
+<pattern height="532" id="grassPattern" patternUnits="userSpaceOnUse" viewBox="0 0 1158.9 1596" width="386">
+<rect fill="#EAF5EE" height="100%" width="100%" x="0" y="0"/>
+<path d="M351.4 895.6l304.5 242.5l-3.1 3.9l-3.2 3.9L345.2 903.4l3.1-3.9ZM509.6 1351.5l114.6 240.3l-4.5 2.1l-4.5 2.2L500.6 1355.8l4.5-2.2ZM115.6 1507l236.2-315l4 3l4 3L123.6 1513l-4-3ZM27.2 362.5l123-305.2l4.7 1.9l4.6 1.9L36.5 366.2l-4.6-1.9ZM693.5 160.7L611.7 4.3l4.5-2.2L620.8 0l81.6 156.1l-4.4 2.3ZM961 694.8l147 290.4l-4.5 2.2l-4.5 2.3L952 699.3l4.5-2.3ZM929.8 1150.4L812.5 1464.2l-4.7-1.8l-4.7-1.7l117.4-313.8l4.7 1.8ZM1158.9 142.7L986.7 477.4l-4.4-2.3l-4.5-2.3L1150 138.1l4.4 2.3ZM312.9 273.8L465.4 638l-4.6 1.9l-4.6 2L303.6 277.7l4.6-1.9ZM1133.7 1316.1l22.7 234.1l-4.9 0.4l-5 0.5l-22.8-234l5-0.5ZM798.2 414.4L749 793.4l-5-0.6l-4.9-0.7l49.2-379l5 0.7ZM186.2 717.6L9 1076.9l-4.5-2.2L0 1072.5L177.2 713.2l4.5 2.2Z" fill="black" stroke="none"/>
+</pattern>
+<pattern height="1491" id="poolPattern" patternUnits="userSpaceOnUse" viewBox="0 0 2694.6 1491.2" width="2695">
+<rect fill="#C5E2FA" height="100%" width="100%" x="0" y="0"/>
+<defs>
+<path d="M15 35 c20 10 100 10 150 -35 c20 30 90 30 110 0 c50 45 130 45 150 35" fill="none" id="w" stroke="black" stroke-width="4"/>
+</defs>
+<use href="#w" x="0" y="0"/>
+<use href="#w" x="300" y="200"/>
+<use href="#w" x="1000" y="60"/>
+<use href="#w" x="700" y="450"/>
+<use href="#w" x="1440" y="380"/>
+<use href="#w" x="2270" y="300"/>
+<use href="#w" x="180" y="680"/>
+<use href="#w" x="920" y="760"/>
+<use href="#w" x="1600" y="910"/>
+<use href="#w" x="600" y="1050"/>
+<use href="#w" x="1250" y="1300"/>
+<use href="#w" x="1980" y="1420"/>
+<use href="#w" x="520" y="1450"/>
+<use href="#w" x="2020" y="600"/>
+<use href="#w" x="-200" y="1150"/>
+<use href="#w" x="2494.6" y="1150"/>
+</pattern>
+</defs>
+<g id="rooms" class="rms">
+<g class="room void-space" id="room62">
+<polygon fill="black" points="3683.0,-10140.9 3683.0,-8229.6 3784.6,-8229.6 3784.6,-10140.9 3683.0,-10140.9 " stroke="black"/>
+<g class="arrows" id="arrows62">
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(3683.0 -9191.9) rotate(-90.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(3784.6 -9191.9) rotate(-270.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(3756.0 -10140.9) rotate(0.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(3756.0 -8229.6) rotate(-180.00)"/>
+</g>
+</g>
+<g class="room void-space" id="room60">
+<polygon fill="black" points="3784.6,-8115.3 3683.0,-8115.3 3683.0,-8051.8 3784.6,-8051.8 3784.6,-8115.3 " stroke="black"/>
+<g class="arrows" id="arrows60">
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(3683.0 -8099.4) rotate(-90.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(3784.6 -8099.4) rotate(-270.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(3711.6 -8115.3) rotate(0.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(3711.6 -8051.8) rotate(-180.00)"/>
+</g>
+</g>
+<g class="room bedroom" id="room59">
+<polygon points="3898.9,-7175.5 4464.1,-7175.5 7353.3,-7175.5 7353.3,-10115.6 3898.9,-10115.5 3898.9,-8172.4 3898.9,-7994.6 3898.9,-7175.5 "/>
+<g class="arrows" id="arrows59">
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(3898.9 -8658.5) rotate(-90.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(7353.3 -8658.5) rotate(-270.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(5546.3 -10115.6) rotate(0.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(5546.3 -7175.5) rotate(-180.00)"/>
+</g>
+</g>
+<g class="room living" id="room57">
+<polygon points="2076.4,-5956.3 3638.5,-5956.3 3638.5,-5975.3 4464.1,-5975.3 4464.1,-7061.2 3829.0,-7061.2 2749.5,-7061.2 2076.4,-7061.2 2076.4,-5956.3 "/>
+<g class="arrows" id="arrows57">
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(2076.4 -6518.3) rotate(-90.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(4464.1 -6518.3) rotate(-270.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(3257.5 -7061.2) rotate(0.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(3257.5 -5956.3) rotate(-180.00)"/>
+</g>
+</g>
+<g class="room stairs" id="room56">
+<polygon points="7442.2,-5118.1 7442.2,-7061.2 4464.1,-7061.2 4464.1,-5975.3 6483.4,-5975.3 6483.3,-5118.1 7442.2,-5118.1 "/>
+<g class="arrows" id="arrows56">
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(4464.1 -6431.2) rotate(-90.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(7442.2 -6431.2) rotate(-270.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(6809.3 -7061.2) rotate(0.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(6809.3 -5118.1) rotate(-180.00)"/>
+</g>
+</g>
+<g class="room bedroom" id="room50">
+<polygon points="1936.7,-7861.3 1714.5,-7861.3 1714.5,-10115.6 -1873.3,-10115.6 -1873.3,-5956.3 -76.2,-5956.3 1695.4,-5956.3 1936.8,-5956.3 1936.7,-7118.4 1936.7,-7861.3 "/>
+<g class="arrows" id="arrows50">
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(-1873.3 -7079.1) rotate(-90.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(1936.7 -7079.1) rotate(-270.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(-12.2 -10115.6) rotate(0.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(-12.2 -5956.3) rotate(-180.00)"/>
+</g>
+</g>
+<g class="room storage" id="room52">
+<polygon points="-31.8,-4953.0 1638.3,-4953.0 1638.3,-5842.0 -31.8,-5842.0 -31.8,-4953.0 "/>
+<g class="arrows" id="arrows52">
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(-31.8 -5432.4) rotate(-90.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(1638.3 -5432.4) rotate(-270.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(793.7 -5842.0) rotate(0.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(793.8 -4953.0) rotate(-180.00)"/>
+</g>
+</g>
+<g class="room storage" id="room54">
+<polygon points="2051.0,-7937.5 2051.0,-7175.5 2692.4,-7175.5 2692.4,-7937.5 2051.0,-7937.5 "/>
+<g class="arrows" id="arrows54">
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(2051.1 -7566.0) rotate(-90.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(2692.4 -7566.0) rotate(-270.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(2374.9 -7937.5) rotate(0.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(2374.9 -7175.5) rotate(-180.00)"/>
+</g>
+</g>
+<g class="room living" id="room53">
+<polygon points="3784.6,-7950.2 3632.2,-7950.2 2806.7,-7950.2 2806.7,-7175.5 3784.6,-7175.5 3784.6,-7950.2 "/>
+<g class="arrows" id="arrows53">
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(2806.7 -7566.0) rotate(-90.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(3784.6 -7566.0) rotate(-270.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(3295.7 -7950.2) rotate(0.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(3295.7 -7175.5) rotate(-180.00)"/>
+</g>
+</g>
+<g class="room bathroom" id="room48">
+<polygon points="1854.2,-8051.8 1987.5,-8051.8 2749.5,-8051.8 3594.1,-8051.8 3594.1,-8172.4 3594.1,-10128.3 1854.2,-10128.3 1854.2,-8051.8 "/>
+<g class="arrows" id="arrows48">
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(1854.2 -9102.7) rotate(-90.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(3594.1 -9102.7) rotate(-270.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(2828.9 -10128.3) rotate(0.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(2828.9 -8051.8) rotate(-180.00)"/>
+</g>
+</g>
+<g class="room storage" id="room51">
+<polygon points="-2000.3,-4953.0 -146.1,-4953.0 -146.1,-5842.0 -2000.3,-5842.0 -2000.3,-4953.0 "/>
+<g class="arrows" id="arrows51">
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(-2000.3 -5403.9) rotate(-90.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(-146.1 -5403.9) rotate(-270.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(-1041.4 -5842.0) rotate(0.00)"/>
+<polygon points="0.0, 0.0 -47.0, 165.0 0.0, 131.0 47.0, 165.0 " transform="translate(-1041.4 -4953.0) rotate(-180.00)"/>
+</g>
+</g>
+</g>
+<symbol id="file-windows-1-Standard.svg" preserveAspectRatio="none" viewBox="0 0 118 25">
+<path d="M0 9.1h118 M0 16.9h118" fill="none" stroke="#000"/>
+</symbol>
+<symbol id="file-doors-1-Standard.svg" preserveAspectRatio="none" viewBox="0 0 80 80">
+<path d="M0 40L66.6 1.1" fill="none" stroke="#000" stroke-width="2"/>
+<path d="M66.1 1.1C75 15.5 79.4 30 79.4 40" fill="none" stroke="#000"/>
+</symbol>
+<symbol id="file-doors-3-Walkway.svg" preserveAspectRatio="none" viewBox="0 0 360 390"/>
+<g id="cosmeticlines">
+<path class="line" d="M6483.3 -5975.3 L6483.3 -7061.2 "/>
+<path class="line" d="M6483.3 -7061.2 L4464.1 -7061.2 "/>
+<path class="line" d="M4464.1 -5975.3 L4464.1 -7061.2 "/>
+<path class="line" d="M6483.3 -5975.3 L4464.1 -5975.3 "/>
+<path class="line" d="M6483.3 -5118.1 L7442.2 -5118.1 "/>
+<path class="line" d="M6483.3 -5975.3 L6483.3 -5118.1 "/>
+<path class="line" d="M7442.2 -5975.3 L7442.2 -5118.1 "/>
+<path class="line" d="M6483.3 -5975.3 L7442.2 -5975.3 "/>
+<path class="line" d="M4716.5 -5975.3 L4716.5 -7061.2 "/>
+<path class="line" d="M4590.3 -6518.3 L4716.5 -6518.3 "/>
+<path class="line" d="M4968.9 -5975.3 L4968.9 -7061.2 "/>
+<path class="line" d="M4716.5 -6518.3 L4968.9 -6518.3 "/>
+<path class="line" d="M5221.3 -5975.3 L5221.3 -7061.2 "/>
+<path class="line" d="M4968.9 -6518.3 L5221.3 -6518.3 "/>
+<path class="line" d="M5473.7 -5975.3 L5473.7 -7061.2 "/>
+<path class="line" d="M5221.3 -6518.3 L5473.7 -6518.3 "/>
+<path class="line" d="M5726.1 -5975.3 L5726.1 -7061.2 "/>
+<path class="line" d="M5473.7 -6518.3 L5726.1 -6518.3 "/>
+<path class="line" d="M5978.5 -5975.3 L5978.5 -7061.2 "/>
+<path class="line" d="M5726.1 -6518.3 L5978.5 -6518.3 "/>
+<path class="line" d="M6230.9 -5975.3 L6230.9 -7061.2 "/>
+<path class="line" d="M5978.5 -6518.3 L6230.9 -6518.3 "/>
+<path class="line" d="M6230.9 -6518.3 L6965.9 -6521.4 "/>
+<path class="line" d="M6483.3 -5761.0 L7442.2 -5761.0 "/>
+<path class="line" d="M6965.9 -6521.4 L6962.8 -5761.0 "/>
+<path class="line" d="M6483.3 -5546.7 L7442.2 -5546.7 "/>
+<path class="line" d="M6962.8 -5761.0 L6962.8 -5546.7 "/>
+<path class="line" d="M6483.3 -5332.4 L7442.2 -5332.4 "/>
+<path class="line" d="M6962.8 -5546.7 L6962.8 -5332.4 "/>
+<path class="line" d="M6962.8 -5225.3 L7062.8 -5325.3 "/>
+<path class="line" d="M6962.8 -5225.3 L6862.8 -5325.3 "/>
+<path class="line" d="M6962.8 -5332.4 L6962.8 -5225.3 "/>
+</g>
+<g class="premium" id="objectlines"/>
+<g id="walls">
+<g>
+<path class="halfwall-fill" d="M3638.5-5975.3h825.5v25.4v25.4H3638.5v-25.4Z"/>
+<path class="halfwall-outline" d="M3638.5 -5975.3 L4464.1 -5975.3 M4464.1 -5924.6 L3638.5 -5924.6 "/>
+</g>
+<g>
+<path class="halfwall-fill" d="M4464.1-5975.3H6483.4l-25.4 25.4l-25.4 25.4H4464.1v-25.4Z"/>
+<path class="halfwall-outline" d="M4464.1 -5975.3 L6483.4 -5975.3 M6432.6 -5924.6 L4464.1 -5924.6 "/>
+</g>
+<g>
+<path class="halfwall-fill" d="M6483.3-5975.3v857.3h-25.4h-25.4v-806.5l25.4-25.4Z"/>
+<path class="halfwall-outline" d="M6483.3 -5975.3 L6483.3 -5118.1 L6432.6 -5118.1 L6432.6 -5924.6 "/>
+</g>
+<path class="wall" d="M3632.2-10356.9H3829v108l-44.4 107.9H3683l-50.8-108ZM7658.1-7118.3v2000.3H7550.1H7442.2V-7061.2l107.9-57.1ZM-31.8-4953H1638.3l57.1 76.2l57.2 139.7H-76.2v-139.7ZM-2000.3-5842v889l-57.2 76.2l-158.7 139.7V-5949.9h158.8ZM-2000.3-4953H-146.1l69.8 76.2v139.7H-2216.2l158.8-139.7ZM1936.7-7861.3H1714.5l63.5-133.4l76.2-57.1h133.3v57.1ZM1714.5-7861.3v-2254.2l63.5-133.4l76.2 120.7v2076.4l-76.2 57.1ZM3784.6-8051.8v-63.5l44.4-57.2h69.9v177.8H3829ZM3784.6-8229.6v-1911.3l44.4-108l69.9 133.4v1943.1H3829ZM3683-8229.6h101.6l44.4 57.2l-44.4 57.1H3683l-50.8-57.1ZM4464.1-7175.5H7353.3l196.9 57.1l-108 57.2H4464.1v-57.1ZM3898.9-7175.5h565.2v57.1v57.2H3829v-57.1ZM2051-7175.5h641.4l57.1 57.1v57.2H2076.4l-88.9-57.1ZM1987.5-8051.8h762v57.1l-57.1 57.2H2051l-63.5-57.1ZM1936.7-7118.4v-743l50.8-133.3l63.5 57.1v762.1l-63.5 57.1ZM-31.8-5842v889l-44.5 76.2l-69.8-76.2v-889l69.9-107.9ZM1638.3-4953v-889l57.2-107.9l57.1 107.9v1104.9l-57.2-139.7ZM1695.4-5956.3h241.3l50.8 6.4V-5842h-235l-57.1-107.9ZM2076.4-5956.3H3638.5v6.4V-5842h-1651v-107.9ZM3683-8051.8h101.6l44.4 57.1l-44.4 44.5H3632.2v-44.4ZM3594.1-8172.4v-1955.8l38.1-120.6l50.8 107.9v1911.4l-50.8 57.1ZM3594.1-8051.8v-120.7h38.1l50.8 57.2v63.5l-50.8 57.1ZM3638.5-5949.9v-6.4v31.8ZM-2216.2-5949.9v-4406.9l158.7 107.9l184.2 133.4v4159.2l-184.1 6.4ZM7658.1-10356.9v3238.5h-108l-196.8-57.1v-2940.1l196.9-133.3ZM3829-10356.9H7658.1l-107.9 108l-196.9 133.3H3898.9l-69.8-133.4ZM-2216.2-10356.9H1778v108l-63.5 133.3H-1873.3l-184.2-133.4ZM1778-10356.9H3632.2v108l-38.1 120.6H1854.2l-76.2-120.6ZM1936.8-5956.3V-7118.4h50.8l88.9 57.1v1105l-88.9 6.3ZM2692.4-7175.5v-762l57.2-57.2l57.1 44.5v774.7l-57.1 57.1ZM3784.6-7175.5v-774.7l44.4-44.5h69.9v819.2l-69.9 57.1ZM2806.7-7175.5h977.9l44.5 57.2v57.1H2749.5v-57.1ZM-76.2-5956.3H1695.4v6.4L1638.3-5842H-31.8l-44.4-107.9ZM-1873.3-5956.3h1797v6.4L-146.1-5842H-2000.3l-57.2-107.9ZM2749.5-8051.8h844.6l38.1 57.2v44.4H2806.7l-57.2-44.4Z"/>
+</g>
+<g id="structural-objects">
+<g class="window" id="window26" transform="translate(-2044.7,  -8109.1) rotate(-90.00) scale(1, 1)">
+<rect class="window-rect" height="342.89999999999998" width="1117.5999999999999" x="-558.79999999999995" y="-171.44999999999999"/>
+<use height="342.89999999999998" width="1117.5999999999999" x="-558.79999999999995" xlink:href="#file-windows-1-Standard.svg" y="-171.44999999999999"/>
+</g>
+<g class="window" id="window25" transform="translate(7505.7,  -8699.1) rotate(-270.00) scale(1, 1)">
+<rect class="window-rect" height="304.80000000000001" width="1092.2" x="-546.10000000000002" y="-152.40000000000001"/>
+<use height="304.80000000000001" width="1092.2" x="-546.10000000000002" xlink:href="#file-windows-1-Standard.svg" y="-152.40000000000001"/>
+</g>
+<g class="window" id="window23" transform="translate(5285.5,  -10236.2) rotate(-0.00) scale(1, 1)">
+<rect class="window-rect" height="241.29999999999998" width="1041.3999999999999" x="-520.69999999999993" y="-120.64999999999999"/>
+<use height="241.29999999999998" width="1041.3999999999999" x="-520.69999999999993" xlink:href="#file-windows-1-Standard.svg" y="-120.64999999999999"/>
+</g>
+<g class="window" id="window24" transform="translate(-213.2,  -10236.2) rotate(0.00) scale(1, 1)">
+<rect class="window-rect" height="241.29999999999998" width="1219.1999999999998" x="-609.59999999999991" y="-120.64999999999999"/>
+<use height="241.29999999999998" width="1219.1999999999998" x="-609.59999999999991" xlink:href="#file-windows-1-Standard.svg" y="-120.64999999999999"/>
+</g>
+<g class="window" id="window22" transform="translate(2695.7,  -10242.6) rotate(0.00) scale(1, 1)">
+<rect class="window-rect" height="228.59999999999997" width="1092.2" x="-546.10000000000002" y="-114.29999999999998"/>
+<use height="228.59999999999997" width="1092.2" x="-546.10000000000002" xlink:href="#file-windows-1-Standard.svg" y="-114.29999999999998"/>
+</g>
+<g class="door" id="door30" transform="translate(2006.6,  -6561.6) rotate(-90.00) scale(1, 1)">
+<rect class="door-rect" height="139.69999999999999" width="762" x="-381" y="-69.849999999999994"/>
+<use height="762" width="762" x="-381" xlink:href="#file-doors-1-Standard.svg" y="-381"/>
+</g>
+<g class="door" id="door24" transform="translate(2749.5,  -7541.8) rotate(-90.00) scale(-1, -1)">
+<rect class="door-rect" height="114.3" width="609.59999999999991" x="-304.79999999999995" y="-57.149999999999999"/>
+<use height="609.59999999999991" width="609.59999999999991" x="-304.79999999999995" xlink:href="#file-doors-1-Standard.svg" y="-304.79999999999995"/>
+</g>
+<g class="door" id="door25" transform="translate(3841.7,  -7573.0) rotate(-90.00) scale(1, -1)">
+<rect class="door-rect" height="114.3" width="711.19999999999993" x="-355.59999999999997" y="-57.149999999999999"/>
+<use height="711.19999999999993" width="711.19999999999993" x="-355.59999999999997" xlink:href="#file-doors-1-Standard.svg" y="-355.59999999999997"/>
+</g>
+<g class="door" id="door27" transform="translate(3215.1,  -7118.4) rotate(0.00) scale(-1, -1)">
+<rect class="door-rect" height="114.3" width="762" x="-381" y="-57.149999999999999"/>
+<use height="825.5" width="762" x="-381" xlink:href="#file-doors-3-Walkway.svg" y="-412.75"/>
+</g>
+<g class="door" id="door28" transform="translate(715.2,  -5899.1) rotate(-0.00) scale(1, 1)">
+<rect class="door-rect" height="114.3" width="609.59999999999991" x="-304.79999999999995" y="-57.149999999999999"/>
+<use height="609.59999999999991" width="609.59999999999991" x="-304.79999999999995" xlink:href="#file-doors-1-Standard.svg" y="-304.79999999999995"/>
+</g>
+<g class="door" id="door29" transform="translate(-964.0,  -5899.1) rotate(-0.00) scale(1, 1)">
+<rect class="door-rect" height="114.3" width="609.59999999999991" x="-304.79999999999995" y="-57.149999999999999"/>
+<use height="609.59999999999991" width="609.59999999999991" x="-304.79999999999995" xlink:href="#file-doors-1-Standard.svg" y="-304.79999999999995"/>
+</g>
+<g class="door" id="door26" transform="translate(3162.0,  -8001.0) rotate(0.00) scale(-1, 1)">
+<rect class="door-rect" height="101.59999999999999" width="635" x="-317.5" y="-50.799999999999997"/>
+<use height="635" width="635" x="-317.5" xlink:href="#file-doors-1-Standard.svg" y="-317.5"/>
+</g>
+</g>
+<g class="premium" id="nonstructural-objects"/>
+<g class="ceiling" id="ceilingLines"/>
+<g class="ceiling" id="ceiling-objects"/>
+<defs>
+<mask id="floor2__wall-holes">
+<rect fill="white" height="5619.8" width="9874.3" x="-2216.2" y="-10356.9"/>
+<path d="M-2226.2-7560.3V-8657.9h362.9v1097.6h-362.9ZM7668.1-9235.2V-8163H7343.3V-9235.2h324.8ZM4774.8-10366.9H5796.2v261.3H4774.8v-261.3ZM-812.8-10366.9H386.4v261.3H-812.8v-261.3ZM2159.6-10366.9H3231.8v248.6H2159.6v-248.6ZM1926.7-6190.6v-742h159.7v742H1926.7ZM2682.4-7247v-589.6h134.3V-7247H2682.4ZM3774.6-7227.4v-691.2h134.3v691.2H3774.6ZM2844.1-7185.5h742v134.3h-742v-134.3ZM420.4-5966.3H1010V-5832H420.4v-134.3ZM-1258.8-5966.3h589.6V-5832h-589.6v-134.3ZM2854.5-8061.8h615v121.6h-615v-121.6Z" fill="black"/>
+</mask>
+</defs>
+<g id="labels"><g><rect x="-1987.150000" y="-5817.500000" width="1828.000000" height="840.000000"  transform="rotate(-0.000000, -1073.150000, -5397.500000)" /><text text-anchor="middle" font-size="81.250120" font-family="Arial" transform="translate(-1073.150000 -5369.874959) rotate(-0.000000)">CLOSET</text></g><g><rect x="1872.650000" y="-9773.025000" width="1703.000000" height="1366.000000"  transform="rotate(-90.000000, 2724.150000, -9090.025000)" /><text text-anchor="middle" font-size="81.250120" font-family="Arial" transform="translate(2724.150000 -9152.181342) rotate(0.000000)">3PC BATH</text><text text-anchor="middle" font-size="81.250120" font-family="Arial" transform="translate(2724.150000 -9064.024961) rotate(0.000000)">5&#39;9&#34; x 6&#39;10&#34;</text><text text-anchor="middle" font-size="81.250120" font-family="Arial" transform="translate(2724.150000 -8975.868581) rotate(0.000000)">39 sq ft</text></g><g><rect x="2815.650000" y="-7937.850000" width="960.000000" height="750.000000"  transform="rotate(-0.000000, 3295.650000, -7562.850000)" /><text text-anchor="middle" font-size="81.250120" font-family="Arial" transform="translate(3295.650000 -7535.224959) rotate(-0.000000)">HALL</text></g><g><rect x="2058.725000" y="-7931.500000" width="626.000000" height="750.000000"  transform="rotate(-0.000000, 2371.725000, -7556.500000)" /><text text-anchor="middle" font-size="81.250120" font-family="Arial" transform="translate(2371.725000 -7528.874959) rotate(-0.000000)">CLO</text></g><g><rect x="-11.725000" y="-5817.500000" width="1630.000000" height="840.000000"  transform="rotate(-0.000000, 803.275000, -5397.500000)" /><text text-anchor="middle" font-size="81.250120" font-family="Arial" transform="translate(803.275000 -5369.874959) rotate(-0.000000)">CLOSET</text></g><g><rect x="-1779.929688" y="-8876.073438" width="3415.000000" height="1718.000000"  transform="rotate(-0.000000, -72.429688, -8017.073438)" /><text text-anchor="middle" font-size="81.250120" font-family="Arial" transform="translate(-72.429688 -8079.229780) rotate(-0.000000)">PRIMARY</text><text text-anchor="middle" font-size="81.250120" font-family="Arial" transform="translate(-72.429688 -7991.073399) rotate(-0.000000)">12&#39;6&#34; x 13&#39;8&#34;</text><text text-anchor="middle" font-size="81.250120" font-family="Arial" transform="translate(-72.429688 -7902.917018) rotate(-0.000000)">165 sq ft</text></g><g><rect x="2463.950000" y="-7037.200000" width="1612.000000" height="1056.000000"  transform="rotate(-0.000000, 3269.950000, -6509.200000)" /><text text-anchor="middle" font-size="81.250120" font-family="Arial" transform="translate(3269.950000 -6481.574959) rotate(-0.000000)">HALL</text></g><g><rect x="4105.600000" y="-9931.525000" width="3041.000000" height="2572.000000"  transform="rotate(-0.000000, 5626.100000, -8645.525000)" /><text text-anchor="middle" font-size="81.250120" font-family="Arial" transform="translate(5626.100000 -8707.681342) rotate(-0.000000)">BEDROOM</text><text text-anchor="middle" font-size="81.250120" font-family="Arial" transform="translate(5626.100000 -8619.524961) rotate(-0.000000)">11&#39;4&#34; x 9&#39;8&#34;</text><text text-anchor="middle" font-size="81.250120" font-family="Arial" transform="translate(5626.100000 -8531.368581) rotate(-0.000000)">109 sq ft</text></g><g><text text-anchor="middle" alignment-baseline="middle" font-size="81.250120" font-family="Arial" transform="translate(4246.610827 -6523.839282) rotate(-0.000000)">DN</text></g></g></svg>

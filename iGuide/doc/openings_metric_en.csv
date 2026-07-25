@@ -1,0 +1,47 @@
+Building,Floor,Room,Type,ID,Width[m],Height[m],Area[m²],Elevation[m]
+Main Building,MAIN FLOOR,4pc Bath,Door,D-41,0.76,2.03,1.5,
+Main Building,MAIN FLOOR,4pc Bath,Window,W-40,1.07,1.22,1.3,0.9
+Main Building,MAIN FLOOR,Bedroom,Door,D-42,0.76,2.03,1.5,
+Main Building,MAIN FLOOR,Bedroom,Door,D-40,0.79,2.03,1.6,
+Main Building,MAIN FLOOR,Bedroom,Window,W-31,1.09,1.22,1.3,0.9
+Main Building,MAIN FLOOR,Bedroom,Door,D-34,0.61,2.03,1.2,
+Main Building,MAIN FLOOR,Bedroom,Door,D-44,0.76,2.03,1.5,
+Main Building,MAIN FLOOR,Bedroom,Window,W-39,1.78,1.22,2.2,0.9
+Main Building,MAIN FLOOR,Breakfast,Door,D-32,0.76,2.03,1.5,
+Main Building,MAIN FLOOR,Breakfast,Window,W-34,1.09,1.22,1.3,0.9
+Main Building,MAIN FLOOR,Dining,Door,D-32,0.76,2.03,1.5,
+Main Building,MAIN FLOOR,Dining,Window,W-36,1.60,1.22,2.0,0.9
+Main Building,MAIN FLOOR,Dining,Window,W-37,2.16,1.22,2.6,0.9
+Main Building,MAIN FLOOR,Electrical Room,Door,D-39,1.17,2.03,2.4,
+Main Building,MAIN FLOOR,Kitchen,Door,D-38,0.81,2.03,1.7,
+Main Building,MAIN FLOOR,Kitchen,Door,D-46,0.84,2.03,1.7,
+Main Building,MAIN FLOOR,Kitchen,Window,W-33,1.07,1.22,1.3,0.9
+Main Building,MAIN FLOOR,Kitchen,Window,W-35,1.65,1.22,2.0,0.9
+Main Building,MAIN FLOOR,Laundry,Door,D-35,0.86,2.03,1.8,
+Main Building,MAIN FLOOR,Laundry,Door,D-39,1.17,2.03,2.4,
+Main Building,MAIN FLOOR,Laundry,Door,D-38,0.81,2.03,1.7,
+Main Building,MAIN FLOOR,Laundry,Window,W-41,1.07,1.22,1.3,0.9
+Main Building,MAIN FLOOR,Living,Door,D-33,0.61,2.03,1.2,
+Main Building,MAIN FLOOR,Living,Door,D-37,0.76,2.03,1.5,
+Main Building,MAIN FLOOR,Living,Window,W-27,3.91,1.22,4.8,0.9
+Main Building,MAIN FLOOR,Living,Window,W-28,0.79,1.22,1.0,0.9
+Main Building,MAIN FLOOR,Living,Door,D-43,1.78,2.03,3.6,
+Main Building,MAIN FLOOR,Living,Window,W-29,0.86,1.22,1.1,0.9
+Main Building,MAIN FLOOR,Living,Window,W-30,0.81,1.22,1.0,0.9
+Main Building,MAIN FLOOR,Living,Door,D-45,1.73,2.03,3.5,
+Main Building,MAIN FLOOR,Living,Window,W-32,0.48,1.22,0.6,0.9
+Main Building,MAIN FLOOR,Storage,Door,D-40,0.79,2.03,1.6,
+Main Building,MAIN FLOOR,Storage,Window,W-38,3.30,1.22,4.0,0.9
+Main Building,MAIN FLOOR,Storage,Door,D-47,1.83,2.03,3.7,
+Main Building,MAIN FLOOR,Storage,Window,W-42,1.65,1.22,2.0,0.9
+Main Building,2ND FLOOR,3pc Bath,Door,D-26,0.64,2.03,1.3,
+Main Building,2ND FLOOR,3pc Bath,Window,W-22,1.09,1.22,1.3,0.9
+Main Building,2ND FLOOR,Bedroom,Door,D-25,0.71,2.03,1.4,
+Main Building,2ND FLOOR,Bedroom,Window,W-23,1.04,1.22,1.3,0.9
+Main Building,2ND FLOOR,Bedroom,Window,W-25,1.09,1.22,1.3,0.9
+Main Building,2ND FLOOR,Primary,Door,D-29,0.61,2.03,1.2,
+Main Building,2ND FLOOR,Primary,Door,D-28,0.61,2.03,1.2,
+Main Building,2ND FLOOR,Primary,Door,D-30,0.76,2.03,1.5,
+Main Building,2ND FLOOR,Primary,Window,W-24,1.22,1.22,1.5,0.9
+Main Building,2ND FLOOR,Primary,Window,W-26,1.12,1.22,1.4,0.9
+"*These values are for reference only and are not precise enough for ordering windows or doors. Accuracy may vary depending on visibility during scanning (e.g., obstructions such as curtains or blinds). Always take your own measurements before ordering."

@@ -1,0 +1,59 @@
+name: Update Reviews on Main and gh-pages
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # Every Sunday at midnight UTC
+  workflow_dispatch: # Allows manual run anytime from GitHub Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  update-both-branches:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Checkout main branch (fetch-depth: 0 fetches all branches)
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: 'main'
+          fetch-depth: 0
+
+      # 2. Set up Python & run scraper
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4
+
+      - name: Run Scraper
+        # Saves updated file to fire_route/public/reviews.json (or reviews.json)
+        run: python reviews/scraper.py
+
+      # 3. Commit and push updated file to 'main'
+      - name: Commit and push to main
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add fire_route/public/reviews.json || git add reviews.json
+          git commit -m "Automated weekly review update [main]" || exit 0
+          git push origin main
+
+      # 4. Copy updated JSON over to 'gh-pages' and push
+      - name: Sync updated JSON to gh-pages branch
+        run: |
+          # Store the freshly generated JSON in a temporary folder
+          cp fire_route/public/reviews.json /tmp/reviews.json || cp reviews.json /tmp/reviews.json
+
+          # Switch to the gh-pages branch
+          git checkout gh-pages
+
+          # Overwrite reviews.json in the gh-pages root directory
+          cp /tmp/reviews.json ./reviews.json
+
+          # Commit and push to gh-pages
+          git add reviews.json
+          git commit -m "Automated weekly review update [gh-pages]" || exit 0
+          git push origin gh-pages
