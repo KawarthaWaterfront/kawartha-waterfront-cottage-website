@@ -18,6 +18,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
 }
 
 .carousel-card {
