@@ -7,8 +7,9 @@
 .carousel h2 {
   font-size: 26px;
   font-weight: 700;
-  color: #1a1a1a;
+  color: #fff;
   margin: 0 0 24px;
+  text-shadow: 2.5px 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 .carousel-stage {
@@ -53,10 +54,6 @@
   box-shadow: 0 14px 48px rgba(0, 0, 0, 0.45);
 }
 
-.carousel-card--expanded {
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.45), 0 0 0 2px rgba(255, 255, 255, 0.8);
-}
-
 .carousel-card-rating {
   display: flex;
   align-items: center;
@@ -91,15 +88,6 @@
   max-height: calc(1.6em * 8);
   mask-image: linear-gradient(to bottom, black 88%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, black 88%, transparent 100%);
-}
-
-.carousel-card-text--expanded {
-  display: block;
-  overflow-y: auto;
-  max-height: 100%;
-  text-align: left;
-  mask-image: none;
-  -webkit-mask-image: none;
 }
 
 .carousel-card-author {

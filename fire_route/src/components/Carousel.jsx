@@ -209,29 +209,26 @@ export default function Carousel() {
     <section className="carousel">
       <h2>What Our Guests Say</h2>
       <div className="carousel-stage">
-        {cards.map(card => {
-          const expanded = card.key === expandedKey
-          return (
-            <div
-              key={card.key}
-              className={`carousel-card${expanded ? ' carousel-card--expanded' : ''}`}
-              style={slideStyle(card.offset)}
-              onClick={() => handleCardClick(card)}
+        {cards.map(card => (
+          <div
+            key={card.key}
+            className="carousel-card"
+            style={slideStyle(card.offset)}
+            onClick={() => handleCardClick(card)}
+          >
+            <Stars rating={card.review.rating} />
+            <p
+              ref={(el) => {
+                if (el) textRefs.current.set(card.key, el)
+                else textRefs.current.delete(card.key)
+              }}
+              className="carousel-card-text"
             >
-              <Stars rating={card.review.rating} />
-              <p
-                ref={(el) => {
-                  if (el) textRefs.current.set(card.key, el)
-                  else textRefs.current.delete(card.key)
-                }}
-                className={`carousel-card-text${expanded ? ' carousel-card-text--expanded' : ''}`}
-              >
-                {card.review.text}
-              </p>
-              <p className="carousel-card-author">{card.review.author}</p>
-            </div>
-          )
-        })}
+              {card.review.text}
+            </p>
+            <p className="carousel-card-author">{card.review.author}</p>
+          </div>
+        ))}
       </div>
       <div className="carousel-dots">
         {[0, 1, 2].map(i => (
