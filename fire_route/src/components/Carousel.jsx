@@ -6,7 +6,7 @@ const INTERVAL_MS = 6000
 const TRANSITION_MS = 700
 const AUTO_SCROLL_SPEED_PX = 0.5
 const AUTO_SCROLL_TICK_MS = 30
-const AUTO_SCROLL_RESUME_DELAY_MS = 3000
+const AUTO_SCROLL_RESUME_DELAY_MS = 1000
 
 // offset: 0=center, ±1=adjacent, ±2=far, ±3+=exiting
 function slideStyle(offset) {
@@ -158,6 +158,13 @@ export default function Carousel() {
   useEffect(() => {
     let holdUntil = null
     let lastKey = null
+    // Tracked separately from el.scrollTop because Firefox rounds fractional
+    // scrollTop assignments down to the nearest integer on read-back — since
+    // AUTO_SCROLL_SPEED_PX is 0.5, deriving `next` from el.scrollTop directly
+    // got stuck reassigning 0.5 -> reads back as 0 -> 0 + 0.5 = 0.5 forever.
+    // A local float accumulator crosses integer boundaries regardless of how
+    // the browser rounds what's actually painted.
+    let progress = 0
 
     const tick = () => {
       const key = frontKeyRef.current
@@ -165,30 +172,40 @@ export default function Carousel() {
       if (key !== lastKey) {
         if (lastKey !== null) {
           const prevEl = textRefs.current.get(lastKey)
-          if (prevEl) prevEl.scrollTop = 0
+          if (prevEl) {
+            prevEl.scrollTop = 0
+            prevEl.classList.remove('carousel-card-text--at-end')
+          }
           if (pauseOwnerRef.current === lastKey) pauseOwnerRef.current = null
         }
         lastKey = key
         holdUntil = null
+        progress = 0
       }
 
       if (key === null) return
       const el = textRefs.current.get(key)
       if (!el) return
       const maxScroll = el.scrollHeight - el.clientHeight
-      if (maxScroll <= 1) return
+      if (maxScroll <= 1) {
+        // Nothing to scroll to reveal, so the bottom fade would only ever
+        // obscure real content — never show it for reviews that already fit.
+        el.classList.add('carousel-card-text--at-end')
+        return
+      }
 
       if (holdUntil === null) {
         if (pauseOwnerRef.current !== key) {
           pauseOwnerRef.current = key
           setPaused(true)
         }
-        const next = el.scrollTop + AUTO_SCROLL_SPEED_PX
-        if (next >= maxScroll) {
+        progress += AUTO_SCROLL_SPEED_PX
+        if (progress >= maxScroll) {
           el.scrollTop = maxScroll
+          el.classList.add('carousel-card-text--at-end')
           holdUntil = Date.now() + AUTO_SCROLL_RESUME_DELAY_MS
         } else {
-          el.scrollTop = next
+          el.scrollTop = progress
         }
       } else if (holdUntil !== Infinity && Date.now() >= holdUntil) {
         if (pauseOwnerRef.current === key) {

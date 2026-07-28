@@ -84,10 +84,21 @@
   font-size: 14px;
   line-height: 1.6;
   color: #333;
-  overflow-y: hidden;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   max-height: calc(1.6em * 8);
   mask-image: linear-gradient(to bottom, black 88%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, black 88%, transparent 100%);
+}
+
+.carousel-card-text::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-card-text--at-end {
+  mask-image: none;
+  -webkit-mask-image: none;
 }
 
 .carousel-card-author {
