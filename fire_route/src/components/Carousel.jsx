@@ -4,6 +4,9 @@ import './Carousel.css'
 const REVIEWS_JSON = `${import.meta.env.BASE_URL}reviews.json`
 const INTERVAL_MS = 6000
 const TRANSITION_MS = 700
+const AUTO_SCROLL_SPEED_PX = 0.5
+const AUTO_SCROLL_TICK_MS = 30
+const AUTO_SCROLL_RESUME_DELAY_MS = 3000
 
 // offset: 0=center, ±1=adjacent, ±2=far, ±3+=exiting
 function slideStyle(offset) {
@@ -17,7 +20,7 @@ function slideStyle(offset) {
   ]
   const c = levels[Math.min(abs, levels.length - 1)]
   return {
-    transform: `translateX(${sign * c.x}%) scale(${c.scale})`,
+    transform: `translateX(${sign * c.x}%) translateY(calc(var(--card-hover-lift, 0px) * -1)) scale(calc(var(--card-hover-scale, 1) * ${c.scale}))`,
     opacity: c.opacity,
     zIndex: 10 - abs,
   }
@@ -51,6 +54,14 @@ export default function Carousel() {
   const centerIndexRef = useRef(0)
   const directionRef = useRef(1)
   const animatingRef = useRef(false)
+  const textRefs = useRef(new Map())
+  const pauseOwnerRef = useRef(null)
+  const expandedKeyRef = useRef(null)
+  const frontKeyRef = useRef(null)
+  expandedKeyRef.current = expandedKey
+  const frontCard = cards.find(c => c.offset === 0)
+  frontKeyRef.current = frontCard && frontCard.key !== expandedKey ? frontCard.key : null
+  const expandedReview = cards.find(c => c.key === expandedKey)?.review
 
   useEffect(() => {
     fetch(REVIEWS_JSON)
@@ -99,13 +110,21 @@ export default function Carousel() {
     return () => clearInterval(t)
   }, [reviews, paused, step])
 
+  function handleClose() {
+    setExpandedKey(null)
+    setPaused(false)
+  }
+
   function handleCardClick(card) {
     if (animatingRef.current) return
 
     if (card.offset === 0) {
-      const willExpand = expandedKey !== card.key
-      setExpandedKey(willExpand ? card.key : null)
-      setPaused(willExpand)
+      if (expandedKey === card.key) {
+        handleClose()
+      } else {
+        setExpandedKey(card.key)
+        setPaused(true)
+      }
       return
     }
 
@@ -128,6 +147,62 @@ export default function Carousel() {
     runStep()
   }
 
+  // Drives the front review's auto-scroll and the carousel's read-time
+  // pause from a single always-running ticker, rather than reacting to
+  // React ref mount/unmount events. Refs (and the effects tied to them)
+  // can be detached and reattached by React independently of whether the
+  // front card actually changed, which previously reset progress and
+  // re-armed the pause every time — the carousel never advanced because
+  // `paused` never stayed false long enough for the slide timer to fire.
+  // Polling `frontKeyRef`/`textRefs` each tick side-steps that entirely.
+  useEffect(() => {
+    let holdUntil = null
+    let lastKey = null
+
+    const tick = () => {
+      const key = frontKeyRef.current
+
+      if (key !== lastKey) {
+        if (lastKey !== null) {
+          const prevEl = textRefs.current.get(lastKey)
+          if (prevEl) prevEl.scrollTop = 0
+          if (pauseOwnerRef.current === lastKey) pauseOwnerRef.current = null
+        }
+        lastKey = key
+        holdUntil = null
+      }
+
+      if (key === null) return
+      const el = textRefs.current.get(key)
+      if (!el) return
+      const maxScroll = el.scrollHeight - el.clientHeight
+      if (maxScroll <= 1) return
+
+      if (holdUntil === null) {
+        if (pauseOwnerRef.current !== key) {
+          pauseOwnerRef.current = key
+          setPaused(true)
+        }
+        const next = el.scrollTop + AUTO_SCROLL_SPEED_PX
+        if (next >= maxScroll) {
+          el.scrollTop = maxScroll
+          holdUntil = Date.now() + AUTO_SCROLL_RESUME_DELAY_MS
+        } else {
+          el.scrollTop = next
+        }
+      } else if (holdUntil !== Infinity && Date.now() >= holdUntil) {
+        if (pauseOwnerRef.current === key) {
+          pauseOwnerRef.current = null
+          if (expandedKeyRef.current === null) setPaused(false)
+        }
+        holdUntil = Infinity
+      }
+    }
+
+    const timer = setInterval(tick, AUTO_SCROLL_TICK_MS)
+    return () => clearInterval(timer)
+  }, [])
+
   if (!cards.length) return null
 
   return (
@@ -144,7 +219,13 @@ export default function Carousel() {
               onClick={() => handleCardClick(card)}
             >
               <Stars rating={card.review.rating} />
-              <p className={`carousel-card-text${expanded ? ' carousel-card-text--expanded' : ''}`}>
+              <p
+                ref={(el) => {
+                  if (el) textRefs.current.set(card.key, el)
+                  else textRefs.current.delete(card.key)
+                }}
+                className={`carousel-card-text${expanded ? ' carousel-card-text--expanded' : ''}`}
+              >
                 {card.review.text}
               </p>
               <p className="carousel-card-author">{card.review.author}</p>
@@ -157,6 +238,16 @@ export default function Carousel() {
           <span key={i} className={`carousel-dot${i === dot ? ' carousel-dot--active' : ''}`} />
         ))}
       </div>
+      {expandedReview && (
+        <div className="carousel-overlay" onClick={handleClose}>
+          <div className="carousel-expanded-card" onClick={(e) => e.stopPropagation()}>
+            <button className="carousel-close-btn" onClick={handleClose} aria-label="Close">×</button>
+            <Stars rating={expandedReview.rating} />
+            <p className="carousel-expanded-text">{expandedReview.text}</p>
+            <p className="carousel-card-author">{expandedReview.author}</p>
+          </div>
+        </div>
+      )}
     </section>
   )
 }
