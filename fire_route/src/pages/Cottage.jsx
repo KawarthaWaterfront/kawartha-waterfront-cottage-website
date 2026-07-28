@@ -69,12 +69,7 @@ function useInView() {
     const el = ref.current
     if (!el) return
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true)
-          observer.unobserve(el)
-        }
-      },
+      ([entry]) => setInView(entry.isIntersecting),
       { threshold: 0.2 }
     )
     observer.observe(el)
@@ -110,14 +105,14 @@ export default function Cottage() {
       <img className="cottage-bg-svg" src={BG_SVG_SRC} alt="" aria-hidden="true" />
       <h1>Cottage</h1>
 
-      <div ref={heroRef} className={`waterfront-hero fade-up${heroInView ? ' in-view' : ''}`}>
+      <div className="waterfront-hero">
         {tagImages[BOXES[0].tag] && (
           <>
             <img className="waterfront-hero-image" src={tagImages[BOXES[0].tag]} alt="" loading="lazy" />
             <div className="waterfront-hero-fade" />
           </>
         )}
-        <div className="box waterfront-hero-box">
+        <div ref={heroRef} className={`box waterfront-hero-box fade-up${heroInView ? ' in-view' : ''}`}>
           {BOXES[0].icon}
           <h3>{BOXES[0].title}</h3>
           <p>{BOXES[0].desc}</p>
@@ -126,8 +121,12 @@ export default function Cottage() {
 
       <section id="floating-boxes" className={boxesExpanded ? 'boxes-expanded' : ''}>
         {BOXES.slice(1).map((box, i) => {
+          const isGuests = box.title === 'Maximum Guests'
           const boxEl = (
-            <div className="box">
+            <div
+              ref={isGuests ? guestsRef : undefined}
+              className={`box${isGuests ? ` fade-right${guestsInView ? ' in-view' : ''}` : ''}`}
+            >
               {box.icon}
               <h3>{box.title}</h3>
               <p>{box.desc}</p>
@@ -137,12 +136,10 @@ export default function Cottage() {
             <img className="box-image" src={tagImages[box.tag]} alt="" loading="lazy" />
           )
           const boxOnLeft = i % 2 === 0
-          const isGuests = box.title === 'Maximum Guests'
 
           return (
             <div
-              ref={isGuests ? guestsRef : undefined}
-              className={`cottage-row${box.dark ? ' cottage-row--dark' : ''}${isGuests ? ` fade-right${guestsInView ? ' in-view' : ''}` : ''}`}
+              className={`cottage-row${box.dark ? ' cottage-row--dark' : ''}`}
               key={box.title}
             >
               <div className="row-slot row-slot--left">{boxOnLeft ? boxEl : imageEl}</div>

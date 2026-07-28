@@ -73,9 +73,9 @@
     to bottom,
     rgba(0, 0, 0, 0) 0%,
     rgba(0, 0, 0, 0) 28%,
-    rgba(10, 10, 12, 0.97) 62%,
-    #0a0a0c 72%,
-    #0a0a0c 100%
+    rgba(0, 0, 0, 0.97) 62%,
+    #000 72%,
+    #000 100%
   );
   pointer-events: none;
 }
@@ -144,7 +144,7 @@
 }
 
 .waterfront-hero .box {
-  background: none;
+  background: #000;
   border: none;
   box-shadow: none;
   backdrop-filter: none;
