@@ -30,6 +30,33 @@ function mod(n, m) {
   return ((n % m) + m) % m
 }
 
+// Some sources' raw review text contains literal <br>/<br/> tags - since the
+// text is rendered as plain text (not HTML), stripping them here avoids the
+// tags showing up verbatim in the card.
+function stripBreakTags(text) {
+  if (!text) return text
+  return text.replace(/<br\s*\/?>/gi, ' ').replace(/\s+/g, ' ').trim()
+}
+
+const SOURCE_LABELS = {
+  cottagesincanada: 'Cottages in Canada',
+  airbnb: 'Airbnb',
+  vrbo: 'Vrbo',
+}
+
+// reviews.json's top-level `sources` is a flat list of listing URLs (one per
+// scraper source), not keyed by source name - match each URL to the source
+// whose reviews it hosts so the expanded card can link out to it.
+function mapSourceUrls(urls) {
+  const map = {}
+  for (const url of urls ?? []) {
+    if (url.includes('cottagesincanada')) map.cottagesincanada = url
+    else if (url.includes('airbnb')) map.airbnb = url
+    else if (url.includes('vrbo')) map.vrbo = url
+  }
+  return map
+}
+
 function Stars({ rating }) {
   const filled = Math.round(rating || 0)
   return (
@@ -44,10 +71,11 @@ function Stars({ rating }) {
   )
 }
 
-export default function Carousel() {
+export default function Carousel({ showRatings = true }) {
   const [reviews, setReviews] = useState([])
+  const [sourceUrls, setSourceUrls] = useState({})
   const [cards, setCards] = useState([])
-  const [dot, setDot] = useState(0)
+  const [currentIndex, setCurrentIndex] = useState(0)
   const [paused, setPaused] = useState(false)
   const [expandedKey, setExpandedKey] = useState(null)
   const keyRef = useRef(0)
@@ -58,6 +86,8 @@ export default function Carousel() {
   const pauseOwnerRef = useRef(null)
   const expandedKeyRef = useRef(null)
   const frontKeyRef = useRef(null)
+  const trackRef = useRef(null)
+  const draggingRef = useRef(false)
   expandedKeyRef.current = expandedKey
   const frontCard = cards.find(c => c.offset === 0)
   frontKeyRef.current = frontCard && frontCard.key !== expandedKey ? frontCard.key : null
@@ -66,12 +96,19 @@ export default function Carousel() {
   useEffect(() => {
     fetch(REVIEWS_JSON)
       .then(r => r.json())
-      .then(data => setReviews(data.reviews ?? []))
+      .then(data => {
+        const cleaned = (data.reviews ?? [])
+          .filter(r => r.include !== false)
+          .map(r => ({ ...r, text: stripBreakTags(r.text) }))
+        setReviews(cleaned)
+        setSourceUrls(mapSourceUrls(data.sources))
+      })
   }, [])
 
   useEffect(() => {
     if (!reviews.length) return
     centerIndexRef.current = 2 % reviews.length
+    setCurrentIndex(centerIndexRef.current)
     setCards(
       [-2, -1, 0, 1, 2].map((offset, i) => ({
         key: keyRef.current++,
@@ -93,7 +130,7 @@ export default function Carousel() {
 
     animatingRef.current = true
     centerIndexRef.current = mod(centerIndexRef.current + dir, n)
-    setDot(d => mod(d + dir, 3))
+    setCurrentIndex(centerIndexRef.current)
     setCards(prev => [
       ...prev.map(c => ({ ...c, offset: c.offset - dir })),
       { key: newKey, review: newReview, offset: enteringOffset },
@@ -134,6 +171,65 @@ export default function Carousel() {
     setPaused(true)
     step(dir)
     setTimeout(() => setPaused(false), TRANSITION_MS + 50)
+  }
+
+  // Rebuilds the deck centered on an arbitrary index rather than reusing
+  // `step()`'s one-slot shift-and-slide - scrubbing can jump many reviews at
+  // once, and every card gets a fresh key here so it mounts directly at its
+  // new position instead of animating across all the skipped slots.
+  const goToIndex = useCallback((idx) => {
+    if (!reviews.length) return
+    const n = reviews.length
+    const target = mod(idx, n)
+    if (target === centerIndexRef.current) return
+    centerIndexRef.current = target
+    setCurrentIndex(target)
+    setCards(
+      [-2, -1, 0, 1, 2].map(offset => ({
+        key: keyRef.current++,
+        review: reviews[mod(target + offset, n)],
+        offset,
+      }))
+    )
+  }, [reviews])
+
+  const scrubToClientX = useCallback((clientX) => {
+    const track = trackRef.current
+    if (!track || !reviews.length) return
+    const rect = track.getBoundingClientRect()
+    const fraction = rect.width > 0 ? (clientX - rect.left) / rect.width : 0
+    const clamped = Math.min(1, Math.max(0, fraction))
+    goToIndex(Math.round(clamped * (reviews.length - 1)))
+  }, [reviews, goToIndex])
+
+  function handleTrackPointerDown(e) {
+    if (animatingRef.current) return
+    draggingRef.current = true
+    setExpandedKey(null)
+    setPaused(true)
+    e.target.setPointerCapture(e.pointerId)
+    scrubToClientX(e.clientX)
+  }
+
+  function handleTrackPointerMove(e) {
+    if (!draggingRef.current) return
+    scrubToClientX(e.clientX)
+  }
+
+  function handleTrackPointerUp() {
+    if (!draggingRef.current) return
+    draggingRef.current = false
+    setPaused(false)
+  }
+
+  function handleTrackKeyDown(e) {
+    if (e.key === 'ArrowRight') {
+      e.preventDefault()
+      goToIndex(centerIndexRef.current + 1)
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault()
+      goToIndex(centerIndexRef.current - 1)
+    }
   }
 
   // Drives the front review's auto-scroll and the carousel's read-time
@@ -225,7 +321,7 @@ export default function Carousel() {
                 style={slideStyle(card.offset)}
                 onClick={isFront ? () => handleCardClick(card) : undefined}
               >
-                <Stars rating={card.review.rating} />
+                {showRatings && <Stars rating={card.review.rating} />}
                 <p
                   ref={(el) => {
                     if (el) textRefs.current.set(card.key, el)
@@ -235,7 +331,10 @@ export default function Carousel() {
                 >
                   {card.review.text}
                 </p>
-                <p className="carousel-card-author">{card.review.author}</p>
+                <p className="carousel-card-author">
+                  {card.review.author}
+                  {card.review.date && <span className="carousel-card-date"> · {card.review.date}</span>}
+                </p>
               </div>
             )
           })}
@@ -261,18 +360,51 @@ export default function Carousel() {
           </svg>
         </button>
       </div>
-      <div className="carousel-dots">
-        {[0, 1, 2].map(i => (
-          <span key={i} className={`carousel-dot${i === dot ? ' carousel-dot--active' : ''}`} />
-        ))}
+      <div className="carousel-progress">
+        <span className="carousel-progress-number">
+          {currentIndex + 1} / {reviews.length}
+        </span>
+        <div
+          ref={trackRef}
+          className="carousel-progress-track"
+          role="slider"
+          aria-label="Review progress"
+          aria-valuemin={1}
+          aria-valuemax={reviews.length}
+          aria-valuenow={currentIndex + 1}
+          tabIndex={0}
+          onPointerDown={handleTrackPointerDown}
+          onPointerMove={handleTrackPointerMove}
+          onPointerUp={handleTrackPointerUp}
+          onPointerCancel={handleTrackPointerUp}
+          onKeyDown={handleTrackKeyDown}
+        >
+          <div
+            className="carousel-progress-fill"
+            style={{ width: `${((currentIndex + 1) / reviews.length) * 100}%` }}
+          />
+        </div>
       </div>
       {expandedReview && (
         <div className="carousel-overlay" onClick={handleClose}>
           <div className="carousel-expanded-card" onClick={(e) => e.stopPropagation()}>
             <button className="carousel-close-btn" onClick={handleClose} aria-label="Close">×</button>
-            <Stars rating={expandedReview.rating} />
+            {showRatings && <Stars rating={expandedReview.rating} />}
             <p className="carousel-expanded-text">{expandedReview.text}</p>
-            <p className="carousel-card-author">{expandedReview.author}</p>
+            <p className="carousel-card-author">
+              {expandedReview.author}
+              {expandedReview.date && <span className="carousel-card-date"> · {expandedReview.date}</span>}
+            </p>
+            {sourceUrls[expandedReview.source] && (
+              <a
+                className="carousel-source-link"
+                href={sourceUrls[expandedReview.source]}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View on {SOURCE_LABELS[expandedReview.source] ?? expandedReview.source}
+              </a>
+            )}
           </div>
         </div>
       )}

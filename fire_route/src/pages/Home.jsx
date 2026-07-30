@@ -3,6 +3,8 @@ import Carousel from '../components/Carousel'
 import VideoPlayer from '../components/VideoPlayer'
 import './Home.css'
 
+const SHOW_REVIEW_RATINGS = false
+
 export default function Home() {
   return (
     <div className="layout-wrap">
@@ -30,7 +32,7 @@ export default function Home() {
         </div>
       </section>
 
-      <Carousel />
+      <Carousel showRatings={SHOW_REVIEW_RATINGS} />
 
       <section id="next-steps">
         {/* <div id="docs">
