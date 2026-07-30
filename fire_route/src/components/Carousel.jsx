@@ -118,33 +118,22 @@ export default function Carousel() {
   function handleCardClick(card) {
     if (animatingRef.current) return
 
-    if (card.offset === 0) {
-      if (expandedKey === card.key) {
-        handleClose()
-      } else {
-        setExpandedKey(card.key)
-        setPaused(true)
-      }
-      return
+    if (expandedKey === card.key) {
+      handleClose()
+    } else {
+      setExpandedKey(card.key)
+      setPaused(true)
     }
+  }
+
+  function handleNav(dir) {
+    if (animatingRef.current) return
 
     setExpandedKey(null)
-    const dir = card.offset > 0 ? 1 : -1
     directionRef.current = dir
-    const stepsToGo = Math.abs(card.offset)
     setPaused(true)
-
-    let done = 0
-    const runStep = () => {
-      step(dir)
-      done++
-      if (done < stepsToGo) {
-        setTimeout(runStep, TRANSITION_MS + 50)
-      } else {
-        setTimeout(() => setPaused(false), TRANSITION_MS + 50)
-      }
-    }
-    runStep()
+    step(dir)
+    setTimeout(() => setPaused(false), TRANSITION_MS + 50)
   }
 
   // Drives the front review's auto-scroll and the carousel's read-time
@@ -225,27 +214,52 @@ export default function Carousel() {
   return (
     <section className="carousel">
       <h2>What Our Guests Say</h2>
-      <div className="carousel-stage">
-        {cards.map(card => (
-          <div
-            key={card.key}
-            className="carousel-card"
-            style={slideStyle(card.offset)}
-            onClick={() => handleCardClick(card)}
-          >
-            <Stars rating={card.review.rating} />
-            <p
-              ref={(el) => {
-                if (el) textRefs.current.set(card.key, el)
-                else textRefs.current.delete(card.key)
-              }}
-              className="carousel-card-text"
-            >
-              {card.review.text}
-            </p>
-            <p className="carousel-card-author">{card.review.author}</p>
-          </div>
-        ))}
+      <div className="carousel-stage-wrap">
+        <div className="carousel-stage">
+          {cards.map(card => {
+            const isFront = card.offset === 0
+            return (
+              <div
+                key={card.key}
+                className={`carousel-card${isFront ? ' carousel-card--front' : ''}`}
+                style={slideStyle(card.offset)}
+                onClick={isFront ? () => handleCardClick(card) : undefined}
+              >
+                <Stars rating={card.review.rating} />
+                <p
+                  ref={(el) => {
+                    if (el) textRefs.current.set(card.key, el)
+                    else textRefs.current.delete(card.key)
+                  }}
+                  className="carousel-card-text"
+                >
+                  {card.review.text}
+                </p>
+                <p className="carousel-card-author">{card.review.author}</p>
+              </div>
+            )
+          })}
+        </div>
+        <button
+          type="button"
+          className="carousel-arrow carousel-arrow--prev"
+          onClick={() => handleNav(-1)}
+          aria-label="Previous review"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+        <button
+          type="button"
+          className="carousel-arrow carousel-arrow--next"
+          onClick={() => handleNav(1)}
+          aria-label="Next review"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <polyline points="9 6 15 12 9 18" />
+          </svg>
+        </button>
       </div>
       <div className="carousel-dots">
         {[0, 1, 2].map(i => (
