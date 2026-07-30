@@ -30,6 +30,8 @@ jobs:
 
       - name: Run Scraper
         # Saves updated file to fire_route/public/reviews.json (or reviews.json)
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
         run: python reviews/scraper.py
 
       # 3. Commit and push updated file to 'main'
