@@ -2,9 +2,9 @@
   "sources": [
     "https://www.cottagesincanada.com/42737",
     "https://www.airbnb.ca/rooms/1331967211097025994",
-    "https://www.vrbo.com/en-ca/cottage-rental/p20158487?dateless=true"
+    "https://www.vrbo.com/en-ca/cottage-rental/p20158487"
   ],
-  "scrapedAt": "2026-07-30T06:36:07.551009+00:00",
+  "scrapedAt": "2026-07-30T07:09:45.792259+00:00",
   "aggregate": {
     "rating": 5.0,
     "count": 3
@@ -29,6 +29,86 @@
       "author": "Yin",
       "rating": 5.0,
       "text": "We recently had the pleasure of staying at this wonderful cottage in the summer, and it truly gave my family a memorable getaway. Honestly, the photos don't do it justice—the view of the lake is absolutely incredible and breathtaking from morning to evening.It was the perfect spot for our children (ages 6 and 8). They spent hours kayaking, swimming in the clear lake, and playing in the sandpit. A huge plus for us was the cottage's design; the abundance of windows in the main living area made it incredibly easy to keep a watchful eye on them while they played outside.The owners have clearly put a lot of care into this space. It was spotlessly clean upon arrival, and the well-maintained green space outside made enjoying the beautiful views even easier. Their attention to detail ensures a comfortable and relaxing stay for guests.For a change of scenery, we drove into Bobcaygeon, which is a nice little town with a great variety of dinner options. We really enjoyed exploring it.We can't wait to return and highly recommend this cottage to any family looking for a perfect lakeside vacation!",
+      "date": "July 2025"
+    },
+    {
+      "source": "airbnb",
+      "id": "1723349686546704781",
+      "author": "Jessica",
+      "rating": 5,
+      "text": "Fantastic experience at Kim's cottage! Beautiful location, very swimmable. Fully equipped with everything we needed. Kim was responsive, on top of things and very proactive with her communication. Friendly neighbours. <br/>The cottage is only a 10 min drive to Bobcaygeon, which is a huge bonus. <br/>We are already hoping we can book again next year and make it an annual rental.",
+      "date": "July 2026"
+    },
+    {
+      "source": "airbnb",
+      "id": "1718135207756069991",
+      "author": "David",
+      "rating": 5,
+      "text": "Absolutely Stunning property, clean home, very spacious, peaceful area, above all Kim is a Super host, all the very best to her 😊 we love to be back here before summer ends 😇",
+      "date": "June 2026"
+    },
+    {
+      "source": "airbnb",
+      "id": "1703737566424967689",
+      "author": "Peter",
+      "rating": 5,
+      "text": "Had a great time at Kim’s place. The views are stunning, and the house is beautiful, clean, and has lots to do. Good for all kinds of groups. Kim and Sherman were very responsive with the very few questions or concerns we had throughout the stay. Would highly recommend staying here!",
+      "date": "June 2026"
+    },
+    {
+      "source": "airbnb",
+      "id": "1489966405487315676",
+      "author": "Kevin",
+      "rating": 5,
+      "text": "Easy access to the lake and great view to chill",
+      "date": "August 2025"
+    },
+    {
+      "source": "airbnb",
+      "id": "1468913154649473912",
+      "author": "Patti",
+      "rating": 5,
+      "text": "We had a wonderful stay at Kim’s cottage on Pigeon Lake!  The cottage itself is beautiful and very clean!  Bathrooms were pristine!! The large windows offered scenic views of the lake.  Bedrooms are spacious and have comfortable beds.  There is a wonderful antique buffet unit, setup as a coffee/tea station in the breakfast nook, and we made our coffee every morning and enjoyed it on their great dock.   The dock is great and we tied our boat to it.  We would highly recommend this cottage to anyone looking to enjoy a getaway with some beautiful views, fishing, swimming  and close to some cute towns to explore.",
+      "date": "July 2025"
+    },
+    {
+      "source": "vrbo",
+      "id": "6a385fdd668f09050fe32b71",
+      "author": "murray p.",
+      "rating": 5.0,
+      "text": "This vacation rental certainly checked all of the boxes for our multi-generational family group.  Accommodations were excellent and the hosts provided lots of games, indoor and outdoor toys, books and puzzles so all ages were kept active, regardless of the weather.  Highly recommend this rental for a family vacation or a group of friends.",
+      "date": "June 2026"
+    },
+    {
+      "source": "vrbo",
+      "id": "6890f035bf829b668a6795ae",
+      "author": "Karen T.",
+      "rating": 5.0,
+      "text": "Stayed with the family for 4 nights at this beautiful and very clean lakefront cottage.  There were many updates (kitchen, bathrooms, etc.), while still maintaining a lovely cottage-y vibe.  Close to the boat launch.  Kim is a great host - very communicative and detailed.",
+      "date": "July 2025"
+    },
+    {
+      "source": "vrbo",
+      "id": "68bf7520f5bddb7d82953588",
+      "author": "Michael R.",
+      "rating": 5.0,
+      "text": "A great combination of a very friendly and communicative host, and a wonderful cottage and location. The lake views, and the soaring ceilings of the great room were spectacular. The beautiful cottage has all you need to enjoy and is very roomy, the location comes with lots of privacy and quiet. That panoramic lake view is really something to see. I cant wait to get back here again, thanks so much for everything Kim.",
+      "date": "September 2025"
+    },
+    {
+      "source": "vrbo",
+      "id": "6a5f69237c5ba22fdfa5e885",
+      "author": "Wendy N.",
+      "rating": 5.0,
+      "text": "Everything was just like it was in the description and photos.  The home was very clean and the host was very easy to contact.  My family stayed here for one week and we all enjoyed our time and the grandkids loved the lake toys and games that were available.  It has a beautiful view and right  on Pigeon lake.  Having the full kitchen with a dishwasher and laundry facilities was great for a large family.  Sitting under the front porch was one of our favourite things and enjoying the beautiful views and the sounds of the waves and calmness of the water first thing in the morning.",
+      "date": "July 2026"
+    },
+    {
+      "source": "vrbo",
+      "id": "68726f6238160c36bbd3f992",
+      "author": "Sarah K.",
+      "rating": 5.0,
+      "text": "My family and I stayed for 3nights, was a beautiful place and kim was great!",
       "date": "July 2025"
     }
   ]

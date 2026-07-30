@@ -12,6 +12,7 @@ with APIFY_TOKEN=...).
 import json
 import os
 import re
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -20,7 +21,7 @@ from bs4 import BeautifulSoup
 
 COTTAGESINCANADA_URL = "https://www.cottagesincanada.com/42737"
 AIRBNB_LISTING_URL = "https://www.airbnb.ca/rooms/1331967211097025994"
-VRBO_LISTING_URL = "https://www.vrbo.com/en-ca/cottage-rental/p20158487?dateless=true"
+VRBO_LISTING_URL = "https://www.vrbo.com/en-ca/cottage-rental/p20158487"
 APIFY_AIRBNB_ACTOR = "tri_angle~airbnb-reviews-scraper"
 APIFY_VRBO_ACTOR = "powerai~vrbo-reviews-scraper"
 
@@ -50,15 +51,45 @@ load_env_file(ENV_PATH)
 APIFY_TOKEN = os.environ.get("APIFY_TOKEN")
 
 
-def run_apify_actor(actor, run_input):
+def run_apify_actor(actor, run_input, timeout=600, poll_interval=5):
+    """Starts the actor asynchronously and polls for completion, rather than
+    using the run-sync-get-dataset-items endpoint - that endpoint's own wait
+    window is shorter than these actors' typical runtime (VRBO's routinely
+    takes ~2-3 minutes to get past bot-detection retries), so it was
+    returning an empty result while the run kept going in the background."""
     response = requests.post(
-        f"https://api.apify.com/v2/acts/{actor}/run-sync-get-dataset-items",
+        f"https://api.apify.com/v2/acts/{actor}/runs",
         params={"token": APIFY_TOKEN},
         json=run_input,
-        timeout=600,
+        timeout=60,
     )
     response.raise_for_status()
-    return response.json()
+    run = response.json()["data"]
+    run_id = run["id"]
+
+    deadline = time.time() + timeout
+    while run["status"] not in ("SUCCEEDED", "FAILED", "ABORTED", "TIMED-OUT"):
+        if time.time() >= deadline:
+            raise TimeoutError(f"Apify actor {actor} run {run_id} did not finish within {timeout}s")
+        time.sleep(poll_interval)
+        status_response = requests.get(
+            f"https://api.apify.com/v2/actor-runs/{run_id}",
+            params={"token": APIFY_TOKEN},
+            timeout=30,
+        )
+        status_response.raise_for_status()
+        run = status_response.json()["data"]
+
+    if run["status"] != "SUCCEEDED":
+        raise RuntimeError(f"Apify actor {actor} run {run_id} ended with status {run['status']}")
+
+    items_response = requests.get(
+        f"https://api.apify.com/v2/datasets/{run['defaultDatasetId']}/items",
+        params={"token": APIFY_TOKEN},
+        timeout=60,
+    )
+    items_response.raise_for_status()
+    return items_response.json()
 
 
 def fetch_html(url):
@@ -103,10 +134,21 @@ def parse_cottagesincanada_reviews(html):
     return aggregate, reviews
 
 
-def month_year(text):
-    """Normalizes a "Mon YYYY"/"Month YYYY" substring found anywhere in
-    `text` to a consistent "Month YYYY" string, e.g. "Sep 2025" -> "September
-    2025". Falls back to the raw text if no such substring is found."""
+def iso_to_month_year(iso_text):
+    """Converts an ISO 8601 timestamp (Airbnb's `createdAt`) to "Month YYYY",
+    e.g. "2026-07-05T18:28:11Z" -> "July 2026"."""
+    if not iso_text:
+        return iso_text
+    try:
+        return datetime.fromisoformat(iso_text.replace("Z", "+00:00")).strftime("%B %Y")
+    except ValueError:
+        return iso_text
+
+
+def extract_month_year(text):
+    """Pulls a "Mon YYYY"/"Month YYYY" substring out of free text (VRBO's
+    `stayedText`, e.g. "Stayed 7 nights in Jun 2026") and normalizes it to
+    "Month YYYY". Falls back to the raw text if no such substring is found."""
     if not text:
         return text
     match = re.search(r"([A-Za-z]{3,9})\.?\s+(\d{4})", text)
@@ -142,18 +184,35 @@ def fetch_airbnb_reviews(since_date=None):
                 "author": reviewer.get("firstName"),
                 "rating": item.get("rating"),
                 "text": item.get("text"),
-                "date": month_year(item.get("createdAt")),
+                "date": iso_to_month_year(item.get("createdAt")),
             }
         )
     return reviews
 
 
-def fetch_vrbo_reviews():
+def fetch_vrbo_reviews(max_attempts=3):
     if not APIFY_TOKEN:
         print("APIFY_TOKEN not set (env var or reviews/.env); skipping VRBO reviews.")
         return []
 
-    items = run_apify_actor(APIFY_VRBO_ACTOR, {"searchUrl": VRBO_LISTING_URL})
+    # VRBO blocks direct/datacenter requests with a bot-detection challenge
+    # (HTTP 429) - the actor's default proxyConfiguration has useApifyProxy
+    # off, so it needs to be turned on explicitly to get through.
+    run_input = {
+        "searchUrl": VRBO_LISTING_URL,
+        "proxyConfiguration": {"useApifyProxy": True, "apifyProxyGroups": ["RESIDENTIAL"]},
+    }
+
+    # Even through the residential proxy, VRBO intermittently blocks the
+    # actor's navigation entirely (run still reports SUCCEEDED, just with 0
+    # items) - retry a few times rather than treating one empty run as "no
+    # reviews".
+    items = []
+    for attempt in range(1, max_attempts + 1):
+        items = run_apify_actor(APIFY_VRBO_ACTOR, run_input)
+        if items:
+            break
+        print(f"VRBO actor returned 0 reviews on attempt {attempt}/{max_attempts}; retrying.")
 
     reviews = []
     for item in items:
@@ -169,7 +228,7 @@ def fetch_vrbo_reviews():
                 "author": item.get("author"),
                 "rating": rating_5,
                 "text": item.get("reviewText"),
-                "date": month_year(item.get("stayedText")),
+                "date": extract_month_year(item.get("stayedText")),
             }
         )
     return reviews
@@ -200,7 +259,12 @@ def merge_reviews_by_id(existing_data, new_reviews, source):
 def main():
     existing_data = load_existing()
     since_date = None
-    if existing_data and existing_data.get("scrapedAt"):
+    if existing_data and existing_data.get("scrapedAt") and any(
+        r.get("source") == "airbnb" for r in existing_data.get("reviews", [])
+    ):
+        # Only incrementally fetch once we've actually pulled Airbnb reviews
+        # before - otherwise (e.g. first run, or a prior run with no token)
+        # this would ask Apify for reviews "since today", getting nothing.
         since_date = existing_data["scrapedAt"][:10]
 
     html = fetch_html(COTTAGESINCANADA_URL)
