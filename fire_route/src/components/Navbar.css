@@ -2,7 +2,6 @@
 .navbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 0 32px;
   height: 60px;
   background: rgba(255, 255, 255, 0.25);
@@ -11,14 +10,34 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.18);
 }
 
+.navbar--sticky {
+  position: sticky;
+  top: 0;
+  z-index: 150;
+}
+
 .nav-logo {
   display: flex;
   align-items: center;
   text-decoration: none;
+  /* taller than the 60px navbar, top-anchored so it overhangs the bottom edge */
+  align-self: flex-start;
+  position: relative;
+  padding: 0 10px;
+  /* Its own, more opaque badge fill sitting on top of the navbar's tint —
+     high enough opacity that doubling up with the bar's tint underneath
+     (for the part over the 60px bar) barely shows against the overhang
+     (which only has this layer over the page). */
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(36px);
+  -webkit-backdrop-filter: blur(36px);
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
 .nav-logo-img {
-  height: 40px;
+  height: 100px;
   width: auto;
   display: block;
 }
@@ -26,7 +45,9 @@
 .nav-right {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 20px;
+  flex: 1;
 }
 
 .nav-links a.active {

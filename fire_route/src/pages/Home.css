@@ -27,6 +27,7 @@
 .home-book-cta {
   display: flex;
   justify-content: center;
+  gap: 20px;
   padding: 32px 48px;
 }
 

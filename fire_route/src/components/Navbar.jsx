@@ -5,6 +5,12 @@ import './Navbar.css'
 
 const LOGO_SRC = `${import.meta.env.BASE_URL}icons/${encodeURIComponent('la picholine logo - final.png')}`
 
+// Keeps the top navbar pinned in place while scrolling on wide screens
+// (it still scrolls away below the mobile breakpoint, where it's replaced by
+// the persistent floating hamburger button). Flip to false to go back to the
+// nav scrolling out of view with the page.
+const STICKY_NAV_ON_WIDE_SCREENS = true
+
 const NAV_ITEMS = [
   { label: 'Home', to: '/' },
   { label: 'Cottage', to: '/cottage' },
@@ -67,7 +73,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="navbar">
+      <nav className={`navbar${STICKY_NAV_ON_WIDE_SCREENS ? ' navbar--sticky' : ''}`}>
         <Link className="nav-logo" to="/">
           <img src={LOGO_SRC} alt="72 Fire Rte 98" className="nav-logo-img" />
         </Link>
@@ -88,7 +94,7 @@ export default function Navbar() {
       </nav>
 
       <button
-        className={`menu-btn${scrolled ? ' menu-btn--visible' : ''}`}
+        className={`menu-btn${scrolled && !STICKY_NAV_ON_WIDE_SCREENS ? ' menu-btn--visible' : ''}`}
         onClick={() => setSidebarOpen(true)}
         aria-label="Open menu"
       >

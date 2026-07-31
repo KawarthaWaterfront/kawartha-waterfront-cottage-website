@@ -335,6 +335,17 @@ export default function Carousel({ showRatings = true }) {
                   {card.review.author}
                   {card.review.date && <span className="carousel-card-date"> · {card.review.date}</span>}
                 </p>
+                {sourceUrls[card.review.source] && (
+                  <a
+                    className="carousel-source-link"
+                    href={sourceUrls[card.review.source]}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    View on {SOURCE_LABELS[card.review.source] ?? card.review.source}
+                  </a>
+                )}
               </div>
             )
           })}

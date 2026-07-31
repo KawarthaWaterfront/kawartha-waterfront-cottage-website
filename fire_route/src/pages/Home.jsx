@@ -23,11 +23,14 @@ export default function Home() {
       {/* <div className="ticks"></div> */}
 
       <section id="property-video">
-        <h2>Property Video</h2>
+        {/* <h2>Property Video</h2> */}
         <VideoPlayer />
         <div className="home-book-cta">
           <Link className="home-book-btn" to="/iguide">
             View 3D Tour
+          </Link>
+          <Link className="home-book-btn" to="/gallery">
+            View Photo Gallery
           </Link>
         </div>
       </section>
