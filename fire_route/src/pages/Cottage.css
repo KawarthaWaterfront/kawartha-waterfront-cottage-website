@@ -217,20 +217,19 @@
     margin: -24px auto 32px;
     padding: 12px 36px;
     border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid var(--border-strong);
+    background: rgba(251, 247, 241, 0.75);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    color: #fff;
+    color: var(--text-heading);
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow-card);
     transition: background 0.2s, transform 0.2s;
 
     &:hover {
-      background: rgba(255, 255, 255, 0.3);
+      background: var(--sage-100);
       transform: translateY(-1px);
     }
 

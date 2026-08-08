@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom'
 import BookingModal from './BookingModal'
 import './Navbar.css'
 
-const LOGO_SRC = `${import.meta.env.BASE_URL}icons/${encodeURIComponent('la picholine logo - final.png')}`
+const LOGO_SRC = `${import.meta.env.BASE_URL}icons/${encodeURIComponent('la_picholine_logo_no_text.png')}`
 
 // Keeps the top navbar pinned in place while scrolling on wide screens
 // (it still scrolls away below the mobile breakpoint, where it's replaced by

@@ -22,8 +22,8 @@
 .filter-btn {
   padding: 7px 18px;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-strong);
+  background: rgba(251, 247, 241, 0.6);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   color: var(--text-h);
@@ -33,7 +33,7 @@
   transition: background 0.2s, color 0.2s, border-color 0.2s;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--sage-100);
   }
 }
 

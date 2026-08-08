@@ -1,27 +1,84 @@
-#center h1,
-#center p,
-.layout-wrap #next-steps h2,
-.layout-wrap #next-steps p {
-  color: #fff;
+/* Page background, copied from the La Picholine mockup: a soft forest/sage
+   gradient wash over cream, sitting behind the wavy site-wide bg-svg (both
+   are position:fixed z-index:-1, so this one - later in the DOM - paints on
+   top and fully covers it here, since it ends in an opaque cream). */
+.home-bg-gradient {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(to top, rgba(20, 58, 37, 0.32), rgba(20, 58, 37, 0) 42%),
+    radial-gradient(ellipse 900px 600px at 10% -5%, rgba(156, 175, 136, 0.35), transparent 60%),
+    radial-gradient(ellipse 1000px 700px at 100% 10%, rgba(30, 91, 56, 0.14), transparent 55%),
+    radial-gradient(ellipse 800px 900px at 50% 100%, rgba(156, 175, 136, 0.25), transparent 60%),
+    var(--cream-100);
 }
 
-@media (max-width: 768px) {
-  .layout-wrap #next-steps ul a {
-    padding-top: 18px;
-    padding-bottom: 18px;
+.home-bg-noise {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+  opacity: 0.35;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-display);
+  letter-spacing: 0.14em;
+  font-size: 13px;
+  text-transform: uppercase;
+  color: var(--forest-700);
+  margin-bottom: 0px;
+  margin-top: 24px;
+}
+
+.layout-wrap h1 {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0px;
+}
+
+.hero-subtitle {
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--text-muted);
+  max-width: 60ch;
+  margin: 0 auto 8px;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin: 8px 0 4px;
+}
+
+.hero-stat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-stat-icon {
+  display: flex;
+  width: 26px;
+  height: 26px;
+  color: var(--forest-700);
+
+  svg {
+    width: 100%;
+    height: 100%;
   }
 }
 
-#center h1,
-#center p,
-.layout-wrap #next-steps h2,
-.layout-wrap #next-steps p,
-#property-video h2,
-.home-book-btn,
-#contact h2,
-#contact p,
-.contact-link {
-  text-shadow: 2.5px 2px 4px rgba(0, 0, 0, 0.6);
+.hero-stat-label {
+  font-size: 14px;
+  color: var(--text-heading);
 }
 
 .home-book-cta {
@@ -29,27 +86,29 @@
   justify-content: center;
   gap: 20px;
   padding: 32px 48px;
+  flex-wrap: wrap;
 }
 
 .home-book-btn {
   padding: 14px 36px;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  color: #fff;
+  min-width: 220px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: var(--sage-300);
+  color: var(--cream-100);
+  font-family: var(--font-display);
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
+  text-align: center;
   text-decoration: none;
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-card);
   transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.35);
+    background: var(--forest-700);
     transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-raised);
   }
 
   &:active {
@@ -63,70 +122,98 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  h2 {
-    font-size: 26px;
-    font-weight: 700;
-    color: #fff;
-    margin: 0 0 24px;
-  }
 }
 
-#contact {
-  padding: 48px 32px 64px;
-  text-align: center;
-
-  h2 {
-    font-size: 26px;
-    font-weight: 700;
-    color: #fff;
-    margin: 0 0 8px;
-  }
-
-  p {
-    font-size: 15px;
-    color: rgba(255, 255, 255, 0.85);
-    margin: 0 0 28px;
-  }
+/* Bottom section, copied from the mockup's footer: a full-bleed forest-green
+   bar with brand/location on the left, socials centered, and booking/contact
+   info right-aligned. Breaks out of .layout-wrap's max-width the same way
+   Cottage.jsx's .waterfront-hero does. */
+.home-footer {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  margin-top: 80px;
+  background: var(--forest-700);
+  color: var(--cream-100);
 }
 
-.contact-links {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.contact-link {
-  display: inline-flex;
+.home-footer-inner {
+  max-width: 1126px;
+  margin: 0 auto;
+  padding: 40px 32px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 10px;
-  padding: 12px 24px;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  color: #fff;
-  font-size: 15px;
-  font-weight: 600;
-  text-decoration: none;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  gap: 16px;
+  text-align: left;
+}
 
-  &:hover {
-    background: rgba(255, 255, 255, 0.32);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
-  }
+.home-footer-name {
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 0.08em;
+  color: var(--cream-100);
+}
 
-  &:active {
-    transform: translateY(0);
+.home-footer-location {
+  font-family: var(--font-display);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: var(--sage-300);
+  margin-top: 6px;
+}
+
+.home-footer-socials {
+  display: flex;
+  gap: 28px;
+  justify-self: center;
+
+  a {
+    display: flex;
+    color: var(--cream-100);
+    transition: color 0.2s;
+
+    &:hover {
+      color: var(--sage-300);
+    }
   }
 }
 
-.contact-icon {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
+.home-footer-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.home-footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+  color: var(--sage-300);
+  line-height: 1.8;
+  text-align: right;
+
+  a {
+    color: var(--sage-300);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--cream-100);
+      text-decoration: underline;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .home-footer-inner {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .home-footer-contact {
+    text-align: center;
+  }
 }

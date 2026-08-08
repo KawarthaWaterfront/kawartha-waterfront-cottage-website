@@ -3,11 +3,11 @@
   display: flex;
   align-items: center;
   padding: 0 32px;
-  height: 60px;
-  background: rgba(255, 255, 255, 0.25);
+  height: 88px;
+  background: rgba(255, 255, 255, 0.001);
   backdrop-filter: blur(36px);
   -webkit-backdrop-filter: blur(36px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  border-bottom: 1px solid var(--border-strong);
 }
 
 .navbar--sticky {
@@ -20,24 +20,14 @@
   display: flex;
   align-items: center;
   text-decoration: none;
-  /* taller than the 60px navbar, top-anchored so it overhangs the bottom edge */
-  align-self: flex-start;
-  position: relative;
-  padding: 0 10px;
-  /* Its own, more opaque badge fill sitting on top of the navbar's tint —
-     high enough opacity that doubling up with the bar's tint underneath
-     (for the part over the 60px bar) barely shows against the overhang
-     (which only has this layer over the page). */
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(36px);
-  -webkit-backdrop-filter: blur(36px);
-  border-bottom-left-radius: 18px;
-  border-bottom-right-radius: 18px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  /* fills the bar's height minus this padding, like any other nav item */
+  align-self: stretch;
+  padding: 16px 0;
+  box-sizing: border-box;
 }
 
 .nav-logo-img {
-  height: 100px;
+  height: 100%;
   width: auto;
   display: block;
 }
@@ -51,8 +41,18 @@
 }
 
 .nav-links a.active {
-  background: rgba(255, 255, 255, 0.15);
-  color: var(--accent);
+  background: transparent;
+  color: var(--forest-700);
+}
+
+.nav-links a.active::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 0;
+  height: 2px;
+  background: var(--sage-300);
 }
 
 .nav-links {
@@ -61,18 +61,23 @@
   padding: 0;
   display: flex;
   gap: 4px;
+  font-family: var(--font-display);
 
   a {
+    position: relative;
     display: block;
     padding: 6px 14px;
     border-radius: 8px;
     text-decoration: none;
     font-size: 15px;
-    color: #1a1a1a;
-    transition: background 0.2s;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    white-space: nowrap;
+    transition: background 0.2s, color 0.2s;
 
     &:hover {
-      background: rgba(255, 255, 255, 0.15);
+      background: var(--sage-100);
+      color: var(--forest-700);
     }
   }
 }
@@ -91,12 +96,12 @@
     width: 32px;
     height: 32px;
     border-radius: 8px;
-    color: #1a1a1a;
+    color: var(--forest-700);
     transition: background 0.2s, color 0.2s;
 
     &:hover {
-      background: rgba(255, 255, 255, 0.15);
-      color: var(--accent);
+      background: var(--sage-100);
+      color: var(--forest-700);
     }
   }
 
@@ -115,11 +120,11 @@
   width: 42px;
   height: 42px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--border-strong);
+  background: rgba(251, 247, 241, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-card);
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -137,12 +142,12 @@
     width: 18px;
     height: 2px;
     border-radius: 2px;
-    background: var(--text-h);
+    background: var(--forest-700);
     transition: background 0.2s;
   }
 
   &:hover span {
-    background: var(--accent);
+    background: var(--sage-300);
   }
 }
 
@@ -176,11 +181,11 @@
   bottom: 0;
   width: 272px;
   z-index: 400;
-  background: rgba(20, 20, 30, 0.75);
+  background: rgba(14, 42, 26, 0.92);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border-right: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 4px 0 32px rgba(0, 0, 0, 0.4);
+  border-right: 1px solid rgba(251, 247, 241, 0.12);
+  box-shadow: 4px 0 32px rgba(20, 58, 37, 0.4);
   display: flex;
   flex-direction: column;
   padding: 24px 20px;
@@ -196,7 +201,7 @@
   align-self: flex-end;
   background: none;
   border: none;
-  color: var(--text);
+  color: var(--cream-100);
   font-size: 18px;
   cursor: pointer;
   padding: 4px 8px;
@@ -204,8 +209,8 @@
   transition: color 0.2s, background 0.2s;
 
   &:hover {
-    color: #1a1a1a;
-    background: rgba(255, 255, 255, 0.08);
+    color: var(--sage-300);
+    background: rgba(251, 247, 241, 0.08);
   }
 }
 
@@ -229,6 +234,7 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  font-family: var(--font-display);
 
   a {
     display: block;
@@ -236,12 +242,12 @@
     border-radius: 10px;
     text-decoration: none;
     font-size: 16px;
-    color: #f3f4f6;
+    color: var(--cream-100);
     transition: background 0.2s, color 0.2s;
 
     &:hover {
-      background: rgba(255, 255, 255, 0.1);
-      color: var(--accent);
+      background: rgba(251, 247, 241, 0.1);
+      color: var(--sage-300);
     }
   }
 }
@@ -260,12 +266,12 @@
     width: 40px;
     height: 40px;
     border-radius: 10px;
-    color: #f3f4f6;
+    color: var(--cream-100);
     transition: background 0.2s, color 0.2s;
 
     &:hover {
-      background: rgba(255, 255, 255, 0.1);
-      color: var(--accent);
+      background: rgba(251, 247, 241, 0.1);
+      color: var(--sage-300);
     }
   }
 
@@ -279,7 +285,7 @@
   position: fixed;
   inset: 0;
   z-index: 300;
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(14, 42, 26, 0.5);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.32s ease;
@@ -304,11 +310,13 @@
   padding: 6px 14px;
   border-radius: 8px;
   font-size: 15px;
-  color: #1a1a1a;
-  transition: background 0.2s;
+  color: var(--text-muted);
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--sage-100);
+    color: var(--forest-700);
   }
 }
 
@@ -319,11 +327,11 @@
   padding: 12px 16px;
   border-radius: 10px;
   font-size: 16px;
-  color: #f3f4f6;
+  color: var(--cream-100);
   transition: background 0.2s, color 0.2s;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--accent);
+    background: rgba(251, 247, 241, 0.1);
+    color: var(--sage-300);
   }
 }
