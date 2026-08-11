@@ -20,7 +20,7 @@ export default function BookingModal({ open, onClose }) {
       <div className="booking-modal" role="dialog" aria-modal="true" aria-label="Book your stay">
         <button className="booking-close" onClick={onClose} aria-label="Close">✕</button>
         <h2 className="booking-title">Book Your Stay</h2>
-        <p className="booking-subtitle">72 Fire Rte 98 · Trent Lakes, ON</p>
+        <p className="booking-subtitle">La Picholine - Vacation Rental</p>
         <div className="booking-grid">
           {PLATFORMS.map(({ name, href, color, logo }) => (
             <a
