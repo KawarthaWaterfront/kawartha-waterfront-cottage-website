@@ -1,24 +1,42 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './VideoPlayer.css'
 
-const CDN_VIDEO_BASE = import.meta.env.VITE_CDN_BASE_BACKGROUND_VIDEO
-const VIDEO_JSON = `${import.meta.env.BASE_URL}videos/background-video.json`
+const YOUTUBE_ID = 'kL72RSLUNh8'
 const THUMBNAIL_SRC = `${import.meta.env.BASE_URL}images/thumbnail.jpg`
 
 export default function VideoPlayer() {
-  const [videoSrc, setVideoSrc] = useState(null)
-
-  useEffect(() => {
-    fetch(VIDEO_JSON)
-      .then(r => r.json())
-      .then(data => setVideoSrc(`${CDN_VIDEO_BASE}${data[0].filename}`))
-  }, [])
-
-  if (!videoSrc) return null
+  const [playing, setPlaying] = useState(false)
 
   return (
-    <video className="property-video" controls playsInline poster={THUMBNAIL_SRC}>
-      <source src={videoSrc} type="video/mp4" />
-    </video>
+    <div className="property-video">
+      {playing ? (
+        <iframe
+          className="property-video-frame"
+          src={`https://www.youtube.com/embed/${YOUTUBE_ID}?autoplay=1&rel=0`}
+          title="La Picholine property video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      ) : (
+        <>
+          <img
+            src={THUMBNAIL_SRC}
+            alt="La Picholine cottage and waterfront"
+            className="property-video-poster"
+          />
+          <div className="property-video-fade" />
+          <button
+            type="button"
+            className="property-video-play"
+            onClick={() => setPlaying(true)}
+            aria-label="Play video"
+          >
+            <svg width="28" height="32" viewBox="0 0 28 32" aria-hidden="true">
+              <polygon points="0,0 28,16 0,32" />
+            </svg>
+          </button>
+        </>
+      )}
+    </div>
   )
 }

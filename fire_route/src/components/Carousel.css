@@ -7,9 +7,8 @@
 .carousel h2 {
   font-size: 26px;
   font-weight: 700;
-  color: #fff;
+  color: #17331f;
   margin: 0 0 24px;
-  text-shadow: 2.5px 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 .carousel-stage-wrap {
@@ -183,7 +182,7 @@
 .carousel-progress-number {
   font-size: 13px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.85);
+  color: #17331f;
   white-space: nowrap;
 }
 
@@ -192,7 +191,7 @@
   width: 120px;
   height: 3px;
   border-radius: 2px;
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(23, 51, 31, 0.18);
   cursor: pointer;
   touch-action: none;
   /* Extra vertical hit area beyond the thin visible track, so the bar is
@@ -203,7 +202,7 @@
 }
 
 .carousel-progress-track:focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.9);
+  outline: 2px solid rgba(23, 51, 31, 0.6);
   outline-offset: 4px;
   border-radius: 4px;
 }
@@ -212,7 +211,7 @@
   position: relative;
   height: 3px;
   border-radius: 2px;
-  background: rgba(255, 255, 255, 0.9);
+  background: #17331f;
 }
 
 .carousel-progress-track:not(:active) .carousel-progress-fill {
@@ -227,9 +226,9 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #fff;
+  background: #17331f;
   transform: translateY(-50%);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 1px 4px rgba(23, 51, 31, 0.4);
 }
 
 .carousel-overlay {

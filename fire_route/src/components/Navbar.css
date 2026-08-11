@@ -7,7 +7,7 @@
   background: rgba(255, 255, 255, 0.001);
   backdrop-filter: blur(36px);
   -webkit-backdrop-filter: blur(36px);
-  border-bottom: 1px solid var(--border-strong);
+  /* border-bottom: 1px solid var(--border-strong); */
 }
 
 .navbar--sticky {
@@ -20,9 +20,8 @@
   display: flex;
   align-items: center;
   text-decoration: none;
-  /* fills the bar's height minus this padding, like any other nav item */
+  /* fills the full height of the bar so the logo renders as large as possible */
   align-self: stretch;
-  padding: 16px 0;
   box-sizing: border-box;
 }
 
@@ -217,8 +216,17 @@
 .sidebar-logo {
   display: flex;
   align-items: center;
+  gap: 10px;
   margin: 16px 0 32px;
   text-decoration: none;
+}
+
+.sidebar-logo-text {
+  font-family: var(--font-display);
+  font-size: 16px;
+  letter-spacing: 0.08em;
+  color: var(--cream-100);
+  white-space: nowrap;
 }
 
 .sidebar-logo-img {

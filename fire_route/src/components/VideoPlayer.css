@@ -1,10 +1,64 @@
 .property-video {
+  position: relative;
   display: block;
   width: 100%;
-  max-width: 720px;
+  /* 900px = the previous 720px cap, 25% larger */
+  max-width: 900px;
   aspect-ratio: 16 / 9;
-  object-fit: cover;
-  border-radius: 16px;
+  margin: 0 auto;
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--shadow-card);
+  background: #0d1f14;
+}
+
+.property-video-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.property-video-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.property-video-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(13, 31, 20, 0.4), rgba(13, 31, 20, 0) 55%);
+}
+
+.property-video-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 84px;
+  height: 84px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(251, 247, 241, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-raised);
+  transition: background 0.2s, transform 0.2s;
+
+  &:hover {
+    background: #fff;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+
+  svg {
+    margin-left: 4px;
+    fill: var(--forest-700);
+  }
 }

@@ -3,7 +3,11 @@ import { Link, NavLink } from 'react-router-dom'
 import BookingModal from './BookingModal'
 import './Navbar.css'
 
-const LOGO_SRC = `${import.meta.env.BASE_URL}icons/${encodeURIComponent('la_picholine_logo_no_text.png')}`
+const LOGO_SRC = `${import.meta.env.BASE_URL}icons/logo_right_text.png`
+// The combined logo's mark and wordmark are both dark forest green, so it
+// disappears against the sidebar's dark background - the sidebar keeps the
+// mark-only image plus its own light-colored text label instead.
+const SIDEBAR_LOGO_SRC = `${import.meta.env.BASE_URL}icons/la_picholine_logo_no_text.png`
 
 // Keeps the top navbar pinned in place while scrolling on wide screens
 // (it still scrolls away below the mobile breakpoint, where it's replaced by
@@ -75,7 +79,7 @@ export default function Navbar() {
     <>
       <nav className={`navbar${STICKY_NAV_ON_WIDE_SCREENS ? ' navbar--sticky' : ''}`}>
         <Link className="nav-logo" to="/">
-          <img src={LOGO_SRC} alt="72 Fire Rte 98" className="nav-logo-img" />
+          <img src={LOGO_SRC} alt="La Picholine" className="nav-logo-img" />
         </Link>
         <div className="nav-right">
           <ul className="nav-links">
@@ -104,7 +108,8 @@ export default function Navbar() {
       <aside className={`sidebar${sidebarOpen ? ' sidebar--open' : ''}`}>
         <button className="sidebar-close" onClick={() => setSidebarOpen(false)} aria-label="Close menu">✕</button>
         <Link className="sidebar-logo" to="/" onClick={() => setSidebarOpen(false)}>
-          <img src={LOGO_SRC} alt="72 Fire Rte 98" className="sidebar-logo-img" />
+          <img src={SIDEBAR_LOGO_SRC} alt="" className="sidebar-logo-img" />
+          <span className="sidebar-logo-text">La Picholine</span>
         </Link>
         <ul className="sidebar-links">
           {NAV_ITEMS.map((item) => (
