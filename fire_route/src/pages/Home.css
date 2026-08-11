@@ -1,30 +1,3 @@
-/* Page background, copied from the La Picholine mockup: a soft forest/sage
-   gradient wash over cream, sitting behind the wavy site-wide bg-svg (both
-   are position:fixed z-index:-1, so this one - later in the DOM - paints on
-   top and fully covers it here, since it ends in an opaque cream). */
-.home-bg-gradient {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    linear-gradient(to top, rgba(20, 58, 37, 0.32), rgba(20, 58, 37, 0) 42%),
-    radial-gradient(ellipse 900px 600px at 10% -5%, rgba(156, 175, 136, 0.35), transparent 60%),
-    radial-gradient(ellipse 1000px 700px at 100% 10%, rgba(30, 91, 56, 0.14), transparent 55%),
-    radial-gradient(ellipse 800px 900px at 50% 100%, rgba(156, 175, 136, 0.25), transparent 60%),
-    var(--cream-100);
-}
-
-.home-bg-noise {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  mix-blend-mode: multiply;
-  opacity: 0.35;
-}
-
 .hero-eyebrow {
   font-family: var(--font-display);
   letter-spacing: 0.14em;

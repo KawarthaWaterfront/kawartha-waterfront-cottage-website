@@ -53,8 +53,6 @@ const STATS = [
 export default function Home() {
   return (
     <div className="layout-wrap">
-      <div className="home-bg-gradient" aria-hidden="true" />
-      <div className="home-bg-noise" aria-hidden="true" />
       <section id="center">
         <div className="hero-eyebrow">Northern shores of Pigeon Lake, Trent Lakes, Ontario</div>
         <h1>La Picholine - Vacation Rental</h1>

@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import BookingModal from './BookingModal'
+import navbarLogoFile from 'virtual:icon-folder/navbar_icon'
 import './Navbar.css'
 
-const LOGO_SRC = `${import.meta.env.BASE_URL}icons/logo_right_text.png`
+// Resolves to whatever single image sits in public/icons/navbar_icon/ - drop
+// a different image in that folder to swap the logo, no code change needed.
+const LOGO_SRC = `${import.meta.env.BASE_URL}${navbarLogoFile}`
 // The combined logo's mark and wordmark are both dark forest green, so it
 // disappears against the sidebar's dark background - the sidebar keeps the
 // mark-only image plus its own light-colored text label instead.

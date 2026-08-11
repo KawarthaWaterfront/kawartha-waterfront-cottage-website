@@ -7,12 +7,11 @@ import Gallery from './pages/Gallery'
 import Cottage from './pages/Cottage'
 import Activities from './pages/Activities'
 
-const BG_SVG_SRC = `${import.meta.env.BASE_URL}backgrounds/stacked-waves-haikei.svg`
-
 export default function App() {
   return (
     <>
-      <img className="bg-svg" src={BG_SVG_SRC} alt="" aria-hidden="true" />
+      <div className="bg-gradient" aria-hidden="true" />
+      <div className="bg-noise" aria-hidden="true" />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
