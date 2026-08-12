@@ -20,11 +20,11 @@ const STICKY_NAV_ON_WIDE_SCREENS = true
 
 const NAV_ITEMS = [
   { label: 'Home', to: '/' },
-  { label: 'Cottage', to: '/cottage' },
-  { label: 'Gallery', to: '/gallery' },
-  { label: 'Activities', to: '/activities' },
   { label: 'Book', modal: true },
+  { label: 'Amenities', to: '/cottage' },
+  { label: 'Activities', to: '/activities' },
   { label: '3D Tour', to: '/iguide' },
+  { label: 'Gallery', to: '/gallery' },
 ]
 
 const SOCIAL_LINKS = [

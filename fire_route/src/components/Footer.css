@@ -1,7 +1,7 @@
 /* Bottom section, copied from the mockup's footer: a full-bleed forest-green
    bar with brand/location on the left, socials centered, and booking/contact
-   info right-aligned. Breaks out of .layout-wrap's max-width the same way
-   Cottage.jsx's .waterfront-hero does. Shared across every page. */
+   info right-aligned. Breaks out of .layout-wrap's max-width via 100vw +
+   negative margins. Shared across every page. */
 .site-footer {
   width: 100vw;
   margin-left: calc(50% - 50vw);
