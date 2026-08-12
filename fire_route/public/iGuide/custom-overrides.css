@@ -1,0 +1,19 @@
+/* Local override on top of the vendored iGuide tour viewer bundle (never
+   edit html_assets/ directly - it's third-party, minified, and gets
+   overwritten if the tour is ever re-exported).
+
+   Moves the viewer's fullscreen toggle from its default bottom-right
+   corner to the top-left. !important is needed because the viewer is a
+   Vue app that injects its own <style> tags at runtime, so this
+   stylesheet's position in <head> doesn't reliably win the cascade. Both
+   selectors are covered since the viewer swaps between a desktop
+   (".fullscreen-button") and mobile (".fullscreen-button-mobile") variant
+   depending on its own internal breakpoint. */
+.fullscreen-button,
+.fullscreen-button-mobile {
+  position: fixed !important;
+  top: 16px !important;
+  left: 16px !important;
+  right: auto !important;
+  bottom: auto !important;
+}
