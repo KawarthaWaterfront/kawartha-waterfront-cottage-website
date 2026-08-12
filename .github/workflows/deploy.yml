@@ -12,6 +12,11 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
+    # Tells GitHub Actions to run all npm commands inside your subfolder
+    defaults:
+      run:
+        working-directory: ./fire_route
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
