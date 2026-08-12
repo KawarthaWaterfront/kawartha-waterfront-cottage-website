@@ -11,11 +11,6 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    
-    # Specify the subfolder name here if applicable
-    defaults:
-      run:
-        working-directory: ./fire_route
 
     steps:
       - name: Checkout code
@@ -25,8 +20,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: './YOUR-SUBFOLDER-NAME/package-lock.json'
 
       - name: Configure Git User
         run: |
@@ -34,7 +27,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Run deploy script
         run: npm run deploy
