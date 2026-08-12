@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist -o kawartha",
+    "deploy": "gh-pages -d dist",
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview"
