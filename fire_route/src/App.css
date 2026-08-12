@@ -9,10 +9,15 @@
   box-sizing: border-box;
 }
 
+/* flex:1 (rather than a hardcoded "100svh minus navbar height") lets the
+   frame fill whatever space is actually left in #root's flex column - the
+   navbar is 88px tall on wide screens but not in the layout at all on
+   mobile (it's replaced by the floating hamburger button), so a fixed
+   offset either overflowed or left a gap depending on breakpoint. */
 .iguide-frame {
   display: block;
   width: 100%;
-  height: calc(100svh - 60px);
+  flex: 1;
   border: none;
 }
 
