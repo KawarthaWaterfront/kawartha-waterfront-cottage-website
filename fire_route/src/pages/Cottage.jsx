@@ -104,7 +104,7 @@ const CATEGORIES = [
       'Water toys and floaties',
       'Adult and children life jackets',
       '2 sit-on kayaks',
-      '2-seat canoe',
+      '3-seat canoe',
       'Large floating mat (15 ft long)',
       'Private walk-in sandy beach',
       'Dock — moors small/medium boats (boat launch 5 mins away, dedicated trailer parking spot)',
@@ -115,7 +115,7 @@ const CATEGORIES = [
       'Bench and foldable chairs',
       'Fire pit (firewood provided), metal fire poker',
       'Electrical outlets',
-      'Assortment of outdoor games (plastic axe throwing, water shooters, cornhole etc.)',
+      'Assortment of outdoor games (plastic axe throwing, cornhole etc.)',
     ],
   },
   {
@@ -145,7 +145,7 @@ const CATEGORIES = [
   {
     title: 'Pet Friendly',
     icon: 'paw',
-    items: ['Welcoming dogs only (2 max)', 'Outdoor leash anchors available'],
+    items: ['Welcoming dogs only (1 max)', 'Outdoor leash anchors available'],
   },
   {
     title: 'Safety',
@@ -167,12 +167,8 @@ export default function Cottage() {
         <p>
           This property was originally built as a hunting lodge, so the design attempts to
           maintain the original character but enhance the experience with modern comforts and
-          technology.
-        </p>
-        <p>
-          The needs of a multi-generational family or a pair of young families influenced what
-          this vacation rental includes.
-        </p>
+          technology.  Ideal for a multi-generational family or a pair of young families
+        </p
       </div>
 
       <div className="amenities-grid">
