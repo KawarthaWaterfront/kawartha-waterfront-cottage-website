@@ -168,7 +168,7 @@ export default function Cottage() {
           This property was originally built as a hunting lodge, so the design attempts to
           maintain the original character but enhance the experience with modern comforts and
           technology.  Ideal for a multi-generational family or a pair of young families
-        </p
+        </p>
       </div>
 
       <div className="amenities-grid">

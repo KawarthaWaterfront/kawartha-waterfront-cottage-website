@@ -14,12 +14,17 @@ export default function Gallery() {
       .then(r => r.json())
       .then(data =>
         setImages(
-          data.map((item, i) => ({
-            id: i,
-            src: `${CDN_BASE}${item.filename}?v=2`,
-            alt: item.filename.replace(/^\d+-/, '').replace(/\.\w+$/, '').replace(/_/g, ' '),
-            tags: [item.tag].flat().filter(Boolean),
-          }))
+          data
+            // The manifest's first entry is a `categories` lookup (e.g.
+            // { categories: { outdoor: 1, indoor: 2 } }), not a photo -
+            // skip it rather than trying to render it as one.
+            .filter(item => item.filename)
+            .map((item, i) => ({
+              id: i,
+              src: `${CDN_BASE}${item.filename}?v=2`,
+              alt: item.filename.replace(/^\d+-/, '').replace(/\.\w+$/, '').replace(/_/g, ' '),
+              tags: [item.tag].flat().filter(Boolean),
+            }))
         )
       )
   }, [])
