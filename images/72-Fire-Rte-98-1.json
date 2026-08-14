@@ -2,13 +2,15 @@
   {
     "categories": {
       "outdoor": 1,
-      "indoor": 2
+      "indoor": 2,
+      "patio": 3,
+      "lakeside": 4
     }
   },
   {
     "filename": "004-72_FR_98_FHP-003.jpg",
     "tag": ["Lakeside", "Outdoor", "Lake", "Day", "House"],
-    "category": "outdoor",
+    "category": "lakeside",
     "image-order": 1
   },
   {
@@ -20,7 +22,7 @@
   {
     "filename": "010-72_FR_98_FHP-009.jpg",
     "tag": ["Lakeside", "Outdoor", "Lake", "Day"],
-    "category": "outdoor",
+    "category": "lakeside",
     "image-order": 3
   },
   {
@@ -32,25 +34,25 @@
   {
     "filename": "017-72_FR_98_FHP-016.jpg",
     "tag": ["Lakeside", "Outdoor", "Lake", "Day", "House", "Side View", "Backyard"],
-    "category": "outdoor",
+    "category": "lakeside",
     "image-order": 5
   },
   {
     "filename": "018-72_FR_98_FHP-017.jpg",
     "tag": ["Lakeside", "Outdoor", "Lake", "Day", "House", "Side View", "Backyard"],
-    "category": "outdoor",
+    "category": "lakeside",
     "image-order": 6
   },
   {
     "filename": "021-72_FR_98_FHP-020.jpg",
     "tag": ["Lakeside", "Outdoor", "Lake", "Day", "House", "Porch", "Campfire", "Backyard"],
-    "category": "outdoor",
+    "category": "lakeside",
     "image-order": 7
   },
   {
     "filename": "026-72_FR_98_FHP-025.jpg",
     "tag": ["Lakeside", "Outdoor", "Lake", "Day", "House", "Dock", "Backyard"],
-    "category": "outdoor",
+    "category": "lakeside",
     "image-order": 8
   },
   {
@@ -80,7 +82,7 @@
   {
     "filename": "036-72_FR_98_FHP-035.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "lakeside",
     "image-order": 13
   },
   {
@@ -104,43 +106,43 @@
   {
     "filename": "045-72_FR_98_FHP-044.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "lakeside",
     "image-order": 17
   },
   {
     "filename": "047-72_FR_98_FHP-046.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "lakeside",
     "image-order": 18
   },
   {
     "filename": "051-72_FR_98_FHP-050.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "patio",
     "image-order": 19
   },
   {
     "filename": "053-72_FR_98_FHP-052.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "lakeside",
     "image-order": 20
   },
   {
     "filename": "056-72_FR_98_FHP-055.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "patio",
     "image-order": 21
   },
   {
     "filename": "058-72_FR_98_FHP-057.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "lakeside",
     "image-order": 22
   },
   {
     "filename": "059-72_FR_98_FHP-058.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "lakeside",
     "image-order": 23
   },
   {
@@ -164,151 +166,151 @@
   {
     "filename": "067-72_FR_98_FHP-066.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "indoor",
     "image-order": 27
   },
   {
     "filename": "070-72_FR_98_FHP-069.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "indoor",
     "image-order": 28
   },
   {
     "filename": "075-72_FR_98_FHP-074.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "indoor",
     "image-order": 29
   },
   {
     "filename": "076-72_FR_98_FHP-075.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "indoor",
     "image-order": 30
   },
   {
     "filename": "079-72_FR_98_FHP-078.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "indoor",
     "image-order": 31
   },
   {
     "filename": "080-72_FR_98_FHP-079.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "indoor",
     "image-order": 32
   },
   {
     "filename": "083-72_FR_98_FHP-082.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "indoor",
     "image-order": 33
   },
   {
     "filename": "084-72_FR_98_FHP-083.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "indoor",
     "image-order": 34
   },
   {
     "filename": "086-72_FR_98_FHP-085.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "indoor",
     "image-order": 35
   },
   {
     "filename": "092-72_FR_98_FHP-091.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "indoor",
     "image-order": 36
   },
   {
     "filename": "093-72_FR_98_FHP-092.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "indoor",
     "image-order": 37
   },
   {
     "filename": "094-72_FR_98_FHP-093.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "indoor",
     "image-order": 38
   },
   {
     "filename": "095-72_FR_98_FHP-094.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "indoor",
     "image-order": 39
   },
   {
     "filename": "097-72_FR_98_FHP-096.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "indoor",
     "image-order": 40
   },
   {
     "filename": "098-72_FR_98_FHP-097.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "indoor",
     "image-order": 41
   },
   {
     "filename": "099-72_FR_98_FHP-098.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "indoor",
     "image-order": 42
   },
   {
     "filename": "100-72_FR_98_FHP-099.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "indoor",
     "image-order": 43
   },
   {
     "filename": "102-72_FR_98_FHP-101.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "indoor",
     "image-order": 44
   },
   {
     "filename": "103-72_FR_98_FHP-102.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "indoor",
     "image-order": 45
   },
   {
     "filename": "105-72_FR_98_FHP-104.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "indoor",
     "image-order": 46
   },
   {
     "filename": "107-72_FR_98_FHP-106.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "indoor",
     "image-order": 47
   },
   {
     "filename": "108-72_FR_98_FHP-107.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "indoor",
     "image-order": 48
   },
   {
     "filename": "110-72_FR_98_FHP-109.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "indoor",
     "image-order": 49
   },
   {
     "filename": "111-72_FR_98_FHP-110.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "indoor",
     "image-order": 50
   },
   {
     "filename": "113-72_FR_98_FHP-112.jpg",
     "tag": [],
-    "category": "outdoor",
+    "category": "indoor",
     "image-order": 51
   },
   {
