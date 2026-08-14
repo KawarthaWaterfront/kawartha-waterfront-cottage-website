@@ -21,7 +21,7 @@ const STICKY_NAV_ON_WIDE_SCREENS = true
 const NAV_ITEMS = [
   { label: 'Home', to: '/' },
   { label: 'Book', modal: true },
-  { label: 'Amenities', to: '/cottage' },
+  { label: 'Amenities', to: '/amenities' },
   { label: 'Activities', to: '/activities' },
   { label: '3D Tour', to: '/iguide' },
   { label: 'Gallery', to: '/gallery' },

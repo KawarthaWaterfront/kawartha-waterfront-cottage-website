@@ -4,7 +4,7 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import IGuide from './pages/IGuide'
 import Gallery from './pages/Gallery'
-import Cottage from './pages/Cottage'
+import Amenities from './pages/Amenities'
 import Activities from './pages/Activities'
 
 export default function App() {
@@ -17,7 +17,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/iguide" element={<IGuide />} />
         <Route path="/gallery" element={<Gallery />} />
-        <Route path="/cottage" element={<Cottage />} />
+        <Route path="/amenities" element={<Amenities />} />
         <Route path="/activities" element={<Activities />} />
       </Routes>
     </>

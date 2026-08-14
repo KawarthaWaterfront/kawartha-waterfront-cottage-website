@@ -1,5 +1,5 @@
 import Footer from '../components/Footer'
-import './Cottage.css'
+import './Amenities.css'
 
 // Icon set copied from the mockup's amenities page (one per category).
 const ICONS = {
@@ -159,7 +159,7 @@ const CATEGORIES = [
   },
 ]
 
-export default function Cottage() {
+export default function Amenities() {
   return (
     <div className="layout-wrap">
       <div className="amenities-intro">
