@@ -62,7 +62,7 @@ export default function Gallery() {
 
   const [images, setImages] = useState([])
   const [categoryOrder, setCategoryOrder] = useState([])
-  const [activeTags, setActiveTags] = useState(new Set())
+  const [activeCategory, setActiveCategory] = useState(null)
   const [selectedIdx, setSelectedIdx] = useState(null)
   const [expandedCategories, setExpandedCategories] = useState(new Set())
 
@@ -134,7 +134,6 @@ export default function Gallery() {
                 src,
                 thumb: thumbSrc(src),
                 alt: item.filename.replace(/^\d+-/, '').replace(/\.\w+$/, '').replace(/_/g, ' '),
-                tags: [item.tag].flat().filter(Boolean),
                 category: item.category ?? null,
               }
             })
@@ -153,36 +152,30 @@ export default function Gallery() {
     return () => window.removeEventListener('keydown', onKey)
   }, [selectedIdx])
 
-  const allTags = Array.from(new Set(images.flatMap(img => img.tags)))
-  const hasTags = allTags.length > 0
+  const hasCategories = images.some(img => img.category)
 
-  const toggleTag = (tag) => {
-    if (tag === 'All') {
-      setActiveTags(new Set())
-      return
-    }
-    setActiveTags(prev => {
-      const next = new Set(prev)
-      next.has(tag) ? next.delete(tag) : next.add(tag)
-      return next
-    })
-  }
+  // The full list of filter buttons - every category value actually used by
+  // a photo, declared ones (from the manifest's `categories` header) first
+  // in their declared order, then any others found in the data that aren't
+  // declared. Derived from `images` (not `visible`) so the button list
+  // itself doesn't shrink once a filter narrows `visible`.
+  const presentCategories = new Set(images.map(img => img.category).filter(Boolean))
+  const categoryList = [
+    ...categoryOrder.filter(c => presentCategories.has(c)),
+    ...Array.from(presentCategories).filter(c => !categoryOrder.includes(c)),
+  ]
 
-  const visible =
-    !hasTags || activeTags.size === 0
-      ? images
-      : images.filter(img => img.tags.some(t => activeTags.has(t)))
+  const visible = activeCategory ? images.filter(img => img.category === activeCategory) : images
 
-  // Splits the (already tag-filtered) flat list into per-category groups for
+  // Splits `visible` into per-category groups for the collapsible-card
   // display, while keeping each image's index into `visible` attached - the
   // lightbox's prev/next still cycles the same flat `visible` array/order,
-  // this only changes how the grid is laid out on the page.
-  const hasCategories = images.some(img => img.category)
-  const extraCategories = Array.from(
-    new Set(visible.map(img => img.category).filter(cat => cat && !categoryOrder.includes(cat)))
-  )
+  // this only changes how the grid is laid out on the page. Only used for
+  // the "All" view - picking a specific category filter already narrows
+  // `visible` to one category, so that view skips straight to a flat grid
+  // instead of showing a single collapsible card for it.
   const sections = hasCategories
-    ? [...categoryOrder, ...extraCategories, null]
+    ? [...categoryOrder, ...Array.from(presentCategories).filter(c => !categoryOrder.includes(c)), null]
         .map(category => ({
           category,
           key: category ?? 'uncategorized',
@@ -205,19 +198,21 @@ export default function Gallery() {
     <div className="layout-wrap gallery-page">
       <h1 className="gallery-heading">Photo Gallery</h1>
 
-      {hasTags && (
+      {hasCategories && (
         <div className="gallery-filters">
-          {['All', ...allTags].map(tag => (
+          <button
+            className={`filter-btn${activeCategory === null ? ' filter-btn--active' : ''}`}
+            onClick={() => setActiveCategory(null)}
+          >
+            All
+          </button>
+          {categoryList.map(cat => (
             <button
-              key={tag}
-              className={`filter-btn${
-                tag === 'All'
-                  ? activeTags.size === 0 ? ' filter-btn--active' : ''
-                  : activeTags.has(tag) ? ' filter-btn--active' : ''
-              }`}
-              onClick={() => toggleTag(tag)}
+              key={cat}
+              className={`filter-btn${activeCategory === cat ? ' filter-btn--active' : ''}`}
+              onClick={() => setActiveCategory(cat)}
             >
-              {tag}
+              {cat[0].toUpperCase() + cat.slice(1)}
             </button>
           ))}
         </div>
@@ -252,7 +247,21 @@ export default function Gallery() {
           Photos beyond the first 3 have no on-screen predecessor to morph
           from, so instead they burst outward from a small centered scale
           on expand - and, wrapped in AnimatePresence, shrink back down the
-          same way on collapse instead of just vanishing. */}
+          same way on collapse instead of just vanishing.
+
+          All of this only applies to the "All" view - picking a specific
+          category filter already narrows `visible` to one category, so
+          there's nothing left to collapse; that view is just a flat grid
+          below instead. */}
+      {activeCategory !== null ? (
+        <div className="gallery-grid">
+          {visible.map((img, i) => (
+            <div key={img.id} className="gallery-item" onClick={() => setSelectedIdx(i)}>
+              <img src={img.thumb} alt={img.alt} className="gallery-img" loading="lazy" />
+            </div>
+          ))}
+        </div>
+      ) : (
       <LayoutGroup>
         <AnimatePresence mode="popLayout">
           {expandedSections.map(({ key, label, items }) => (
@@ -293,15 +302,6 @@ export default function Gallery() {
                         onClick={() => setSelectedIdx(i)}
                       >
                         <img src={img.thumb} alt={img.alt} className="gallery-img" loading="lazy" />
-                        {img.tags.length > 0 && (
-                          <div className="gallery-tags">
-                            {img.tags.map(t => (
-                              <span key={t} className="gallery-tag" onClick={(e) => { e.stopPropagation(); toggleTag(t) }}>
-                                {t}
-                              </span>
-                            ))}
-                          </div>
-                        )}
                       </motion.div>
                     )
                   })}
@@ -361,6 +361,7 @@ export default function Gallery() {
           </div>
         )}
       </LayoutGroup>
+      )}
 
       {selectedIdx !== null && (() => {
         const img = visible[selectedIdx]
