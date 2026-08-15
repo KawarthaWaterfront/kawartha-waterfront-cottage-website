@@ -1,334 +1,288 @@
 [
   {
     "categories": {
-      "outdoor": 1,
-      "indoor": 2,
-      "patio": 3,
-      "lakeside": 4
+      "Overview": 1,
+      "Great Room": 2,
+      "Kitchen": 3,
+      "Bedroom 1": 4,
+      "Bedroom 2": 5,
+      "Main Bathroom": 6,
+      "Bedroom 3": 7,
+      "Bedroom 4": 8,
+      "Upstairs Bathroom": 9,
+      "Sunroom": 10,
+      "Patio Area": 11,
+      "Dock, Beach and Waterfront": 12
     }
   },
   {
     "filename": "004-72_FR_98_FHP-003.jpg",
-    "tag": ["Lakeside", "Outdoor", "Lake", "Day", "House"],
-    "category": "lakeside",
+    "category": "Overview",
     "image-order": 1
   },
   {
     "filename": "005-72_FR_98_FHP-004.jpg",
-    "tag": ["Outdoor", "Front View", "House", "Day"],
-    "category": "outdoor",
+    "category": "Overview",
     "image-order": 2
   },
   {
     "filename": "010-72_FR_98_FHP-009.jpg",
-    "tag": ["Lakeside", "Outdoor", "Lake", "Day"],
-    "category": "lakeside",
+    "category": "Overview",
     "image-order": 3
   },
   {
     "filename": "012-72_FR_98_FHP-011.jpg",
-    "tag": ["Lakeside", "Outdoor", "Lake", "Day", "House", "Dock", "Top View"],
-    "category": "outdoor",
+    "category": "Overview",
     "image-order": 4
   },
   {
     "filename": "017-72_FR_98_FHP-016.jpg",
-    "tag": ["Lakeside", "Outdoor", "Lake", "Day", "House", "Side View", "Backyard"],
-    "category": "lakeside",
+    "category": "Overview",
     "image-order": 5
   },
   {
     "filename": "018-72_FR_98_FHP-017.jpg",
-    "tag": ["Lakeside", "Outdoor", "Lake", "Day", "House", "Side View", "Backyard"],
-    "category": "lakeside",
+    "category": "Overview",
     "image-order": 6
   },
   {
     "filename": "021-72_FR_98_FHP-020.jpg",
-    "tag": ["Lakeside", "Outdoor", "Lake", "Day", "House", "Porch", "Campfire", "Backyard"],
-    "category": "lakeside",
+    "category": "Overview",
     "image-order": 7
   },
   {
     "filename": "026-72_FR_98_FHP-025.jpg",
-    "tag": ["Lakeside", "Outdoor", "Lake", "Day", "House", "Dock", "Backyard"],
-    "category": "lakeside",
+    "category": "Dock, Beach and Waterfront",
     "image-order": 8
   },
   {
     "filename": "028-72_FR_98_FHP-027.jpg",
-    "tag": ["Outdoor", "Front View", "House", "Day", "Driveway"],
-    "category": "outdoor",
+    "category": "Overview",
     "image-order": 9
   },
   {
     "filename": "031-72_FR_98_FHP-030.jpg",
-    "tag": ["Nameplate"],
-    "category": "outdoor",
+    "category": "Overview",
     "image-order": 10
   },
   {
     "filename": "032-72_FR_98_FHP-031.jpg",
-    "tag": ["Lake", "Outdoor", "Campfire", "Backyard"],
-    "category": "outdoor",
+    "category": "Patio Area",
     "image-order": 11
   },
   {
     "filename": "033-72_FR_98_FHP-032.jpg",
-    "tag": [],
-    "category": "outdoor",
+    "category": "Overview",
     "image-order": 12
   },
   {
     "filename": "036-72_FR_98_FHP-035.jpg",
-    "tag": [],
-    "category": "lakeside",
+    "category": "Patio Area",
     "image-order": 13
   },
   {
     "filename": "039-72_FR_98_FHP-038.jpg",
-    "tag": [],
-    "category": "outdoor",
+    "category": "Patio Area",
     "image-order": 14
   },
   {
     "filename": "041-72_FR_98_FHP-040.jpg",
-    "tag": [],
-    "category": "outdoor",
+    "category": "Patio Area",
     "image-order": 15
   },
   {
     "filename": "043-72_FR_98_FHP-042.jpg",
-    "tag": [],
-    "category": "outdoor",
+    "category": "Patio Area",
     "image-order": 16
   },
   {
     "filename": "045-72_FR_98_FHP-044.jpg",
-    "tag": [],
-    "category": "lakeside",
+    "category": "Dock, Beach and Waterfront",
     "image-order": 17
   },
   {
     "filename": "047-72_FR_98_FHP-046.jpg",
-    "tag": [],
-    "category": "lakeside",
+    "category": "Dock, Beach and Waterfront",
     "image-order": 18
   },
   {
     "filename": "051-72_FR_98_FHP-050.jpg",
-    "tag": [],
-    "category": "patio",
+    "category": "Dock, Beach and Waterfront",
     "image-order": 19
   },
   {
     "filename": "053-72_FR_98_FHP-052.jpg",
-    "tag": [],
-    "category": "lakeside",
+    "category": "Dock, Beach and Waterfront",
     "image-order": 20
   },
   {
     "filename": "056-72_FR_98_FHP-055.jpg",
-    "tag": [],
-    "category": "patio",
+    "category": "Dock, Beach and Waterfront",
     "image-order": 21
   },
   {
     "filename": "058-72_FR_98_FHP-057.jpg",
-    "tag": [],
-    "category": "lakeside",
+    "category": "Dock, Beach and Waterfront",
     "image-order": 22
   },
   {
     "filename": "059-72_FR_98_FHP-058.jpg",
-    "tag": [],
-    "category": "lakeside",
+    "category": "Dock, Beach and Waterfront",
     "image-order": 23
   },
   {
     "filename": "061-72_FR_98_FHP-060.jpg",
-    "tag": [],
-    "category": "outdoor",
+    "category": "Overview",
     "image-order": 24
   },
   {
     "filename": "063-72_FR_98_FHP-062.jpg",
-    "tag": [],
-    "category": "outdoor",
+    "category": "Overview",
     "image-order": 25
   },
   {
     "filename": "066-72_FR_98_FHP-065.jpg",
-    "tag": [],
-    "category": "outdoor",
+    "category": "Sunroom",
     "image-order": 26
   },
   {
     "filename": "067-72_FR_98_FHP-066.jpg",
-    "tag": [],
-    "category": "indoor",
+    "category": "Great Room",
     "image-order": 27
   },
   {
     "filename": "070-72_FR_98_FHP-069.jpg",
-    "tag": [],
-    "category": "indoor",
+    "category": "Great Room",
     "image-order": 28
   },
   {
     "filename": "075-72_FR_98_FHP-074.jpg",
-    "tag": [],
-    "category": "indoor",
+    "category": "Great Room",
     "image-order": 29
   },
   {
     "filename": "076-72_FR_98_FHP-075.jpg",
-    "tag": [],
-    "category": "indoor",
+    "category": "Great Room",
     "image-order": 30
   },
   {
     "filename": "079-72_FR_98_FHP-078.jpg",
-    "tag": [],
-    "category": "indoor",
+    "category": "Sunroom",
     "image-order": 31
   },
   {
     "filename": "080-72_FR_98_FHP-079.jpg",
-    "tag": [],
-    "category": "indoor",
+    "category": "Sunroom",
     "image-order": 32
   },
   {
     "filename": "083-72_FR_98_FHP-082.jpg",
-    "tag": [],
-    "category": "indoor",
+    "category": "Sunroom",
     "image-order": 33
   },
   {
     "filename": "084-72_FR_98_FHP-083.jpg",
-    "tag": [],
-    "category": "indoor",
+    "category": "Kitchen",
     "image-order": 34
   },
   {
     "filename": "086-72_FR_98_FHP-085.jpg",
-    "tag": [],
-    "category": "indoor",
+    "category": "Kitchen",
     "image-order": 35
   },
   {
     "filename": "092-72_FR_98_FHP-091.jpg",
-    "tag": [],
-    "category": "indoor",
+    "category": "Kitchen",
     "image-order": 36
   },
   {
     "filename": "093-72_FR_98_FHP-092.jpg",
-    "tag": [],
-    "category": "indoor",
+    "category": "Kitchen",
     "image-order": 37
   },
   {
     "filename": "094-72_FR_98_FHP-093.jpg",
-    "tag": [],
-    "category": "indoor",
+    "category": "Main Bathroom",
     "image-order": 38
   },
   {
     "filename": "095-72_FR_98_FHP-094.jpg",
-    "tag": [],
-    "category": "indoor",
+    "category": "Bedroom 1",
     "image-order": 39
   },
   {
     "filename": "097-72_FR_98_FHP-096.jpg",
-    "tag": [],
-    "category": "indoor",
+    "category": "Main Bathroom",
     "image-order": 40
   },
   {
     "filename": "098-72_FR_98_FHP-097.jpg",
-    "tag": [],
-    "category": "indoor",
+    "category": "Main Bathroom",
     "image-order": 41
   },
   {
     "filename": "099-72_FR_98_FHP-098.jpg",
-    "tag": [],
-    "category": "indoor",
+    "category": "Bedroom 2",
     "image-order": 42
   },
   {
     "filename": "100-72_FR_98_FHP-099.jpg",
-    "tag": [],
-    "category": "indoor",
+    "category": "Bedroom 2",
     "image-order": 43
   },
   {
     "filename": "102-72_FR_98_FHP-101.jpg",
-    "tag": [],
-    "category": "indoor",
+    "category": "Dock, Beach and Waterfront",
     "image-order": 44
   },
   {
     "filename": "103-72_FR_98_FHP-102.jpg",
-    "tag": [],
-    "category": "indoor",
+    "category": "Dock, Beach and Waterfront",
     "image-order": 45
   },
   {
     "filename": "105-72_FR_98_FHP-104.jpg",
-    "tag": [],
-    "category": "indoor",
+    "category": "Bedroom 3",
     "image-order": 46
   },
   {
     "filename": "107-72_FR_98_FHP-106.jpg",
-    "tag": [],
-    "category": "indoor",
+    "category": "Bedroom 3",
     "image-order": 47
   },
   {
     "filename": "108-72_FR_98_FHP-107.jpg",
-    "tag": [],
-    "category": "indoor",
+    "category": "Upstairs Bathroom",
     "image-order": 48
   },
   {
     "filename": "110-72_FR_98_FHP-109.jpg",
-    "tag": [],
-    "category": "indoor",
+    "category": "Upstairs Bathroom",
     "image-order": 49
   },
   {
     "filename": "111-72_FR_98_FHP-110.jpg",
-    "tag": [],
-    "category": "indoor",
+    "category": "Bedroom 4",
     "image-order": 50
   },
   {
     "filename": "113-72_FR_98_FHP-112.jpg",
-    "tag": [],
-    "category": "indoor",
+    "category": "Bedroom 4",
     "image-order": 51
   },
   {
     "filename": "East Sunrise-4.jpg",
-    "tag": [],
-    "category": "outdoor",
+    "category": "Overview",
     "image-order": 52
   },
   {
     "filename": "IMG_3663.JPG",
-    "tag": [],
-    "category": "outdoor",
+    "category": "Overview",
     "image-order": 53
   },
   {
     "filename": "IMG_3664.JPG",
-    "tag": [],
-    "category": "outdoor",
+    "category": "Overview",
     "image-order": 54
   }
 ]
