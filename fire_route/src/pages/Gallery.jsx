@@ -127,6 +127,11 @@ export default function Gallery() {
         setImages(
           data
             .filter(item => item.filename)
+            // `image-order` defines display order within a category (and,
+            // since sections filter this already-sorted list, that order
+            // carries straight through to each section's items). Missing
+            // values sort last rather than colliding at 0.
+            .sort((a, b) => (a['image-order'] ?? Infinity) - (b['image-order'] ?? Infinity))
             .map((item, i) => {
               const src = `${CDN_BASE}${item.filename}?v=2`
               return {
