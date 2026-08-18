@@ -17,3 +17,14 @@
   right: auto !important;
   bottom: auto !important;
 }
+
+/* Hides the property address pill in the top bar (bound to `e.title` /
+   propertyObject in the viewer's own render function - not exposed as a
+   documented config flag, so removing it here rather than hunting for an
+   internal prop to flip inside the vendored bundle). `.top-bar-center` is
+   the whole centered address column, not just the text, so hiding it also
+   frees up its reserved flex space instead of leaving a blank gap between
+   the logo and the menu toggle. */
+.top-bar-center {
+  display: none !important;
+}
