@@ -13,6 +13,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "aws-rum-react": "^2.0.5",
+    "aws-rum-web": "^3.2.1",
     "motion": "^13.1.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
