@@ -1,3 +1,53 @@
+/* Self-hosted from public/fonts/ (google-webfonts-helper output) instead of
+   linking fonts.googleapis.com - removes that third-party DNS/TLS/request
+   round trip from the render-blocking path entirely, rather than just
+   making it non-blocking. `../fonts/...` is relative to this file's built
+   location (dist/assets/index-*.css), which is what correctly reaches
+   dist/fonts/ (public/fonts/ copied verbatim) regardless of how `base` in
+   vite.config.js is set - an absolute `/fonts/...` path would only work
+   for a root-served deployment. font-display: swap matches the behavior
+   Google's own stylesheet used (&display=swap) - text renders immediately
+   in the fallback font and swaps in once the real one's loaded. */
+@font-face {
+  font-family: 'Marcellus';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/marcellus-v14-latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/lora-v37-latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../fonts/lora-v37-latin-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/lora-v37-latin-600.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/lora-v37-latin-italic.woff2') format('woff2');
+}
+
 :root {
   /* La Picholine palette — cream/forest/sage */
   --cream-100: #fbf7f1;
