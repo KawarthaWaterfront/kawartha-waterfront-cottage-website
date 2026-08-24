@@ -6,7 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+    <!-- Loaded as a non-blocking preload instead of a plain <link rel="stylesheet">
+         - a normal stylesheet link blocks the page from rendering anything
+         until it's fetched, which on a slow connection means a blank page
+         for the whole round-trip. Swapping `rel` to 'stylesheet' once the
+         file has loaded applies it without holding up first paint (text
+         still shows immediately in a fallback font, per --font-display's
+         own fallback stack, then swaps once Marcellus/Lora arrive). The
+         <noscript> fallback covers browsers with JS disabled. -->
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Marcellus&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+    </noscript>
     <title>Kawartha Waterfront Cottage</title>
   </head>
   <body>

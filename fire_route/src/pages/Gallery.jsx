@@ -19,11 +19,18 @@ const JSON_PATH = `${import.meta.env.BASE_URL}images/72-Fire-Rte-98-1.json`
 // uncompressed, since that's the actual photo the click is for.
 const THUMB_PROXY_BASE = 'https://wsrv.nl/'
 const THUMB_WIDTH = 800
+// The fan of (up to 3) preview photos on a collapsed category card renders
+// each one at well under 200px - on first load, every collapsed card on
+// the page requests its preview photos at once (up to 3 x however many
+// categories there are), so fetching the same 800px-wide image that size
+// just for a tiny preview meaningfully bloats the page's initial payload,
+// which is what's actually slow to arrive on a throttled connection.
+const PREVIEW_THUMB_WIDTH = 240
 
-function thumbSrc(originalSrc) {
+function thumbSrc(originalSrc, width = THUMB_WIDTH) {
   const params = new URLSearchParams({
     url: originalSrc,
-    w: THUMB_WIDTH,
+    w: width,
     output: 'webp',
     q: '75',
   })
@@ -138,6 +145,7 @@ export default function Gallery() {
                 id: i,
                 src,
                 thumb: thumbSrc(src),
+                previewThumb: thumbSrc(src, PREVIEW_THUMB_WIDTH),
                 alt: item.filename.replace(/^\d+-/, '').replace(/\.\w+$/, '').replace(/_/g, ' '),
                 category: item.category ?? null,
               }
@@ -351,7 +359,7 @@ export default function Gallery() {
                       style={{ rotate: scatterRotation(img.id), scale: 1.12 }}
                       whileHover={idx === 0 ? { scale: 1.18 } : undefined}
                     >
-                      <img src={img.thumb} alt="" loading="lazy" />
+                      <img src={img.previewThumb} alt="" loading="lazy" />
                     </motion.div>
                   ))}
                 </div>

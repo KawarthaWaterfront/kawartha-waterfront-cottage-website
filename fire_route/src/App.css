@@ -9,6 +9,19 @@
   box-sizing: border-box;
 }
 
+/* Shown by App.jsx's <Suspense> fallback while a lazy-loaded page's chunk
+   is still downloading (only ever visible on a slow connection or a cold
+   cache - fast enough elsewhere that it never gets a chance to paint). */
+.route-loading {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
 /* flex:1 (rather than a hardcoded "100svh minus navbar height") lets the
    frame fill whatever space is actually left in #root's flex column - the
    navbar is 88px tall on wide screens but not in the layout at all on
