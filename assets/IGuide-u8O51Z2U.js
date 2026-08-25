@@ -1,0 +1,1 @@
+import{n as e}from"./index-BFhMCxW1.js";var t=e(),n=`./iGuide/index.html`;function r(){return(0,t.jsx)(`iframe`,{src:n,className:`iguide-frame`,scrolling:`no`,frameBorder:`0`,allowFullScreen:!0})}export{r as default};
