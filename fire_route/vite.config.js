@@ -83,9 +83,47 @@ function iconFolderModules() {
   }
 }
 
+// Dev-only: keeps the "drop a different file in public/icons/<name>/" swap
+// working live while `vite dev` is already running, not just on the next
+// fresh build. `public/` is served as a static passthrough and isn't part
+// of Vite's watched module graph, and neither faviconFromFolder's
+// transformIndexHtml nor iconFolderModules' load() re-runs on its own just
+// because a file appeared/disappeared on disk - both only re-read the
+// folder when something else triggers them again. Without this, the dev
+// server keeps resolving whatever filename it saw the *first* time it
+// scanned a folder, even after that file's been deleted and replaced -
+// exactly what happened swapping a logo to its WebP version: the page kept
+// requesting the old (now-404ing) filename until a manual server restart.
+function watchIconFolders() {
+  return {
+    name: 'watch-icon-folders',
+    apply: 'serve',
+    configureServer(server) {
+      const iconsDir = path.resolve(__dirname, 'public/icons')
+      server.watcher.add(iconsDir)
+      const onFsEvent = (file) => {
+        if (!path.resolve(file).startsWith(iconsDir)) return
+        // A browser reload alone re-fetches whatever the virtual module
+        // already resolved to - Vite caches that in its own module graph,
+        // and nothing marks it stale just because a file changed on disk
+        // (the load() hook never registered a watch on it), so the cached
+        // filename would keep being served until this is invalidated too.
+        for (const mod of server.moduleGraph.idToModuleMap.values()) {
+          if (mod.id?.startsWith('\0virtual:icon-folder/')) {
+            server.moduleGraph.invalidateModule(mod)
+          }
+        }
+        server.ws.send({ type: 'full-reload' })
+      }
+      server.watcher.on('add', onFsEvent)
+      server.watcher.on('unlink', onFsEvent)
+    },
+  }
+}
+
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), faviconFromFolder(), iconFolderModules()],
+  plugins: [react(), faviconFromFolder(), iconFolderModules(), watchIconFolders()],
   base: './',
   build: {
     target: 'es2022',

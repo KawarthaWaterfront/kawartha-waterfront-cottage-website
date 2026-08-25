@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './VideoPlayer.css'
 
 const YOUTUBE_ID = 'kL72RSLUNh8'
-const THUMBNAIL_SRC = `${import.meta.env.BASE_URL}images/thumbnail.jpg`
+const THUMBNAIL_SRC = `${import.meta.env.BASE_URL}images/thumbnail.webp`
 
 export default function VideoPlayer() {
   const [playing, setPlaying] = useState(false)
