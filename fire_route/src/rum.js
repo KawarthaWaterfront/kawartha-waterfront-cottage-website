@@ -1,10 +1,15 @@
 import { AwsRum } from 'aws-rum-web'
 
 // AWS CloudWatch RUM (Real User Monitoring) - collects page load
-// performance, JS errors, and HTTP timing from real visitors. Imported as
-// the very first thing in main.jsx (before React/react-dom/anything else)
-// so it starts capturing timing data as early as possible in the page's
-// lifecycle rather than after the rest of the app has already loaded.
+// performance, JS errors, and HTTP timing from real visitors. Loaded lazily
+// (see main.jsx) rather than eagerly, so it doesn't tax the critical
+// rendering path. Exports the client instance (or null if init failed) so
+// App.jsx can call `.recordPageView()` on route changes - dynamic imports
+// of the same specifier are cached by the module system, so App.jsx
+// re-importing this file reuses this exact instance instead of running
+// the try/catch (and creating a second client) again.
+let awsRum = null
+
 try {
   const config = {
     sessionSampleRate: 1,
@@ -20,8 +25,9 @@ try {
   const APPLICATION_VERSION = '1.0.0'
   const APPLICATION_REGION = 'us-east-1'
 
-  // eslint-disable-next-line no-new
-  new AwsRum(APPLICATION_ID, APPLICATION_VERSION, APPLICATION_REGION, config)
+  awsRum = new AwsRum(APPLICATION_ID, APPLICATION_VERSION, APPLICATION_REGION, config)
 } catch {
   // Ignore errors thrown during CloudWatch RUM web client initialization
 }
+
+export default awsRum
