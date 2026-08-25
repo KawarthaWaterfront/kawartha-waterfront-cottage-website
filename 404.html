@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Kawartha Waterfront Cottage</title>
+    <script>
+      // GitHub Pages has no server-side routing - it serves this exact
+      // file (with an actual 404 status) for any URL that isn't a real
+      // file, which includes every client-side route (a direct visit or a
+      // page refresh on /gallery, /amenities, etc., now that the app uses
+      // BrowserRouter instead of hash-based routes). Stash the path the
+      // visitor actually wanted, then send them to the real index.html,
+      // which reads this back out and restores the clean URL via
+      // history.replaceState before React Router ever mounts - see the
+      // matching script in index.html.
+      sessionStorage.redirect = location.href
+    </script>
+    <meta http-equiv="refresh" content="0;URL='/'" />
+  </head>
+  <body></body>
+</html>

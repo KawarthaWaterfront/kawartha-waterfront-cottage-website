@@ -2,8 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/icons/website_icon/a.png" />
+    <link rel="icon" type="image/png" href="/icons/website_icon/la_picholine_logo_no_text_background.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Pairs with public/404.html: GitHub Pages has no server-side
+         routing, so a direct visit or refresh on a client-side route (e.g.
+         /gallery) 404s there first, which stashes the intended path and
+         redirects here. This restores the clean URL via
+         history.replaceState *before* React Router mounts (the module
+         script below is deferred by spec, so this always runs first
+         regardless of load timing), so the correct route renders on the
+         very first paint instead of bouncing through the home page. -->
+    <script>
+      (function () {
+        var redirect = sessionStorage.redirect
+        delete sessionStorage.redirect
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, null, redirect)
+        }
+      })()
+    </script>
     <!-- Fonts are self-hosted (public/fonts/, @font-face rules in
          src/index.css) instead of linked from fonts.googleapis.com - no
          third-party DNS/TLS/request round trip at all now, not just a
@@ -16,7 +33,7 @@
     <link rel="preload" href="./fonts/marcellus-v14-latin-regular.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="./fonts/lora-v37-latin-regular.woff2" as="font" type="font/woff2" crossorigin />
     <title>Kawartha Waterfront Cottage</title>
-    <script type="module" crossorigin src="./assets/index-c02U7kDh.js"></script>
+    <script type="module" crossorigin src="./assets/index-CjmzVrJ8.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/rolldown-runtime-Bh1tDfsg.js">
     <link rel="stylesheet" crossorigin href="./assets/index-D-2ve12i.css">
   </head>
