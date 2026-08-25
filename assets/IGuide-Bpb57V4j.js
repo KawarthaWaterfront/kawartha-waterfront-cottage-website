@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-Bh1tDfsg.js";import{n as t}from"./index-c02U7kDh.js";var n=e(t(),1),r=`./iGuide/index.html`;function i(){return(0,n.jsx)(`iframe`,{src:r,className:`iguide-frame`,scrolling:`no`,frameBorder:`0`,allowFullScreen:!0})}export{i as default};
