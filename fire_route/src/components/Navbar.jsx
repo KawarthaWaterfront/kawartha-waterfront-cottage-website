@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import BookingModal from './BookingModal'
 import navbarLogoFile from 'virtual:icon-folder/navbar_icon'
+import { isAnalyticsSignedIn, subscribeAnalyticsSignedIn } from '../analyticsAuth'
 import './Navbar.css'
 
 // Resolves to whatever single image sits in public/icons/navbar_icon/ - drop
@@ -26,6 +27,11 @@ const NAV_ITEMS = [
   { label: '3D Tour', to: '/iguide' },
   { label: 'Gallery', to: '/gallery' },
 ]
+
+// Owner-only, appended only once someone has actually signed in on
+// /analytics - see analyticsAuth.js for why this doesn't just check Clerk
+// directly here.
+const ANALYTICS_NAV_ITEM = { label: 'Analytics', to: '/analytics' }
 
 const SOCIAL_LINKS = [
   {
@@ -55,12 +61,17 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [bookingOpen, setBookingOpen] = useState(false)
+  const [analyticsVisible, setAnalyticsVisible] = useState(isAnalyticsSignedIn)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  useEffect(() => subscribeAnalyticsSignedIn(setAnalyticsVisible), [])
+
+  const navItems = analyticsVisible ? [...NAV_ITEMS, ANALYTICS_NAV_ITEM] : NAV_ITEMS
 
   const scrollTo = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
@@ -86,7 +97,7 @@ export default function Navbar() {
         </Link>
         <div className="nav-right">
           <ul className="nav-links">
-            {NAV_ITEMS.map((item) => (
+            {navItems.map((item) => (
               <li key={item.label}>{renderItem(item)}</li>
             ))}
           </ul>
@@ -115,7 +126,7 @@ export default function Navbar() {
           <span className="sidebar-logo-text">La Picholine</span>
         </Link>
         <ul className="sidebar-links">
-          {NAV_ITEMS.map((item) => (
+          {navItems.map((item) => (
             <li key={item.label}>{renderItem(item)}</li>
           ))}
         </ul>

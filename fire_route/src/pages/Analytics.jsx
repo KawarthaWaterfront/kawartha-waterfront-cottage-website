@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { ClerkProvider, useAuth, SignIn, UserButton } from '@clerk/react'
 import Footer from '../components/Footer'
+import { setAnalyticsSignedIn } from '../analyticsAuth'
 import './Analytics.css'
 
 const CLERK_PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
@@ -95,6 +97,15 @@ function AnalyticsContent() {
   const stats = useRealtimeStats(isSignedIn === true)
   const [tab, setTab] = useState('overview')
 
+  // Lets Navbar show/hide its "Analytics" link without mounting Clerk on
+  // every page - see analyticsAuth.js. Runs before the early returns below
+  // (hooks can't be conditional), so it fires on every render regardless of
+  // sign-in state, including the moment it flips after a sign-out.
+  useEffect(() => {
+    if (!isLoaded) return
+    setAnalyticsSignedIn(isSignedIn === true)
+  }, [isLoaded, isSignedIn])
+
   if (!isLoaded) {
     return <div className="layout-wrap route-loading">Loading…</div>
   }
@@ -104,7 +115,10 @@ function AnalyticsContent() {
       <div className="layout-wrap analytics-page analytics-page--signed-out">
         <h1>Analytics</h1>
         <p className="analytics-signin-prompt">Sign in to view site analytics.</p>
-        <SignIn />
+        {/* Keeps them on this page post-sign-in instead of Clerk's default
+            (home) - also means the isSignedIn-syncing effect above gets to
+            run on this same mount rather than racing a redirect away. */}
+        <SignIn forceRedirectUrl="/analytics" />
       </div>
     )
   }
@@ -258,8 +272,22 @@ function AnalyticsContent() {
 // the bundle every other page has to download too, the same way Gallery's
 // Motion dependency was scoped to just where it's actually used.
 export default function Analytics() {
+  const navigate = useNavigate()
+
   return (
-    <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY}>
+    <ClerkProvider
+      publishableKey={CLERK_PUBLISHABLE_KEY}
+      // Without these, Clerk falls back to a hard `window.location`
+      // redirect for its own sign-in/sign-out navigation, since it has no
+      // other way to know this is a React Router SPA. That hard reload
+      // would blow away the page before the isSignedIn-syncing effect
+      // above gets a chance to run, so the Navbar link only ever updated
+      // after a *second*, separate navigation (e.g. re-typing the URL).
+      // Routing everything through React Router's own navigate() instead
+      // keeps it all in-app, so that effect fires reliably every time.
+      routerPush={(to) => navigate(to)}
+      routerReplace={(to) => navigate(to, { replace: true })}
+    >
       <AnalyticsContent />
     </ClerkProvider>
   )
