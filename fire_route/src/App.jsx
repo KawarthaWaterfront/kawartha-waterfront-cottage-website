@@ -17,10 +17,28 @@ const Amenities = lazy(() => import('./pages/Amenities'))
 const Activities = lazy(() => import('./pages/Activities'))
 const Analytics = lazy(() => import('./pages/Analytics'))
 
+// index.html's static <title> only ever covers the initial load - once
+// BrowserRouter swaps routes client-side, the tab/bookmark/history-entry
+// title would otherwise stay "Kawartha Waterfront Cottage" no matter which
+// page is showing. Keyed by path (matching Navbar's own labels) rather than
+// living in each page component, since it changes for the exact same
+// trigger - a route change - that trackPageView below already handles.
+const SITE_NAME = 'Kawartha Waterfront Cottage'
+const PAGE_TITLES = {
+  '/': SITE_NAME,
+  '/amenities': `Amenities | ${SITE_NAME}`,
+  '/activities': `Activities | ${SITE_NAME}`,
+  '/iguide': `3D Tour | ${SITE_NAME}`,
+  '/gallery': `Gallery | ${SITE_NAME}`,
+  '/analytics': `Analytics | ${SITE_NAME}`,
+}
+
 export default function App() {
   const location = useLocation()
 
   useEffect(() => {
+    document.title = PAGE_TITLES[location.pathname] ?? SITE_NAME
+
     // This is a single-page app (client-side routing via BrowserRouter) -
     // GA's own automatic pageview only ever fires for the one real page
     // load (send_page_view is off in index.html specifically because of
