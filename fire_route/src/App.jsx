@@ -20,7 +20,7 @@ export default function App() {
   const location = useLocation()
 
   useEffect(() => {
-    // This is a single-page app (client-side routing via HashRouter) - AWS
+    // This is a single-page app (client-side routing via BrowserRouter) - AWS
     // RUM's automatic tracking only ever sees the one real page load, with
     // no way to know a route change even happened. Recording a page view
     // on every path change is what makes per-page performance/analytics

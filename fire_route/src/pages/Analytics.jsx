@@ -5,7 +5,7 @@ import './Analytics.css'
 const CLERK_PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
 // Owner-only page - not linked from the public Navbar (it's meaningless to
-// a vacation-rental guest), reachable directly at #/analytics. Signed-out
+// a vacation-rental guest), reachable directly at /analytics. Signed-out
 // visitors see an embedded sign-in form instead of any content.
 function AnalyticsContent() {
   const { isLoaded, isSignedIn } = useAuth()
