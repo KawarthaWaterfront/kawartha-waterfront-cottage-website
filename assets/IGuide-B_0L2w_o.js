@@ -1,1 +1,0 @@
-import{n as e,o as t}from"./index-VAmH8Viy.js";var n=t(e(),1),r=`./iGuide/index.html`;function i(){return(0,n.jsx)(`iframe`,{src:r,className:`iguide-frame`,scrolling:`no`,frameBorder:`0`,allowFullScreen:!0})}export{i as default};

@@ -1,0 +1,1 @@
+import{c as e,r as t}from"./index-DNnDMW6k.js";var n=e(t(),1),r=`./iGuide/index.html`;function i(){return(0,n.jsx)(`iframe`,{src:r,className:`iguide-frame`,scrolling:`no`,frameBorder:`0`,allowFullScreen:!0})}export{i as default};
