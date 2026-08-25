@@ -37,6 +37,58 @@ function thumbSrc(originalSrc, width = THUMB_WIDTH) {
   return `${THUMB_PROXY_BASE}?${params}`
 }
 
+// How fast the page scrolls back to the top when expanding/collapsing a
+// category, in pixels per second - separate knobs since the "right" speed
+// tends to differ by screen size (a long scroll on a narrow phone doesn't
+// necessarily want the same pace as a short one on a wide desktop). Native
+// `scrollTo({ behavior: 'smooth' })` doesn't expose any way to control its
+// speed/duration at all, hence rolling a small custom scroll animation
+// below instead of using it.
+const SCROLL_SPEED_DESKTOP_PX_PER_SEC = 6000
+const SCROLL_SPEED_MOBILE_PX_PER_SEC = 3000
+// Matches the max-width the rest of the app already treats as the
+// mobile/desktop split (see Navbar.css).
+const MOBILE_BREAKPOINT_PX = 768
+
+function easeInOutCubic(t) {
+  return t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2
+}
+
+// Animates the page's scroll position from wherever it currently is up to
+// the very top, at a speed (not a fixed duration) so a long scroll and a
+// short one feel equally fast rather than a short one feeling sluggish or
+// a long one feeling rushed. Calls `onDone` once it actually reaches 0 -
+// used to know precisely when it's safe to release the height-pin in
+// `scrollToTopAndToggle` below, rather than guessing with a timeout.
+function scrollToTopAtSpeed(onDone) {
+  const startY = window.scrollY
+  if (startY <= 0) {
+    onDone()
+    return
+  }
+
+  const speed = window.innerWidth <= MOBILE_BREAKPOINT_PX
+    ? SCROLL_SPEED_MOBILE_PX_PER_SEC
+    : SCROLL_SPEED_DESKTOP_PX_PER_SEC
+  const durationMs = (startY / speed) * 1000
+  // Captured from the first rAF callback's own timestamp, not from calling
+  // performance.now() before scheduling it - if that first callback is
+  // delayed (a backgrounded tab, a busy main thread, mobile throttling),
+  // measuring elapsed time against a start captured too early makes `t`
+  // land past 1 on that very first frame, so the "animation" is really
+  // just an instant jump instead of running at the configured speed.
+  let startTime = null
+
+  function step(now) {
+    if (startTime === null) startTime = now
+    const t = Math.min((now - startTime) / durationMs, 1)
+    window.scrollTo(0, startY * (1 - easeInOutCubic(t)))
+    if (t < 1) requestAnimationFrame(step)
+    else onDone()
+  }
+  requestAnimationFrame(step)
+}
+
 // Deterministic pseudo-random fan angle for a collapsed group's preview
 // photos, seeded by each photo's own id - "random" scatter, but stable
 // across re-renders (a tag toggle or hover shouldn't reshuffle the layout).
@@ -81,38 +133,39 @@ export default function Gallery() {
     })
   }
 
-  // Collapsing while scrolled deep into a large expanded category (e.g. 25
-  // photos) used to jump/snap the page, since the collapsed card is far
-  // shorter and sits back at the top - the scroll position was left
-  // pointing at content that no longer existed.
+  // Both directions move the clicked category to/from the top of the page
+  // (expanded sections always render first), so both need the page
+  // scrolled to the very top - expanding while scrolled down left the
+  // newly-expanded photos off-screen above the viewport, and collapsing
+  // while scrolled deep into a large category (e.g. 25 photos) used to
+  // jump/snap the page, since the collapsed card is far shorter and sits
+  // back at the top, leaving the scroll position pointing at content that
+  // no longer existed.
   //
-  // Motion's layout animations reflow the real DOM to its final (already
-  // collapsed) size the instant React commits the state change - what
-  // visibly "shrinks" over the next 450ms is just a transform faking the
-  // transition on top of a box that's already the new, short size. Waiting
-  // for the scroll to fully finish before ever calling toggleCategory
-  // avoided the snap, but made the collapse feel sluggish - nothing visibly
-  // happened until scrolling was done.
+  // Motion's layout animations reflow the real DOM to its final size the
+  // instant React commits the state change - what visibly grows/shrinks
+  // over the next 450ms is just a transform faking the transition on top
+  // of a box that's already the new size. Waiting for the scroll to fully
+  // finish before ever calling toggleCategory avoided the snap, but made
+  // the toggle feel sluggish - nothing visibly happened until scrolling
+  // was done.
   //
-  // Pinning the document to its current (tall) height for the duration of
-  // the transition instead gives the in-flight scroll somewhere real to
-  // land, so the collapse can start immediately and run *concurrently*
-  // with the scroll - it's the shrinking scrollable area colliding with an
-  // in-progress scroll that caused the snap, not the timing of the visual
-  // animation itself.
-  const collapseCategory = (key) => {
-    if (window.scrollY < 40) {
-      toggleCategory(key)
-      return
-    }
-
-    const pinnedHeight = document.documentElement.scrollHeight
-    document.body.style.minHeight = `${pinnedHeight}px`
-    window.setTimeout(() => {
+  // Pinning the document to its current height for the duration of the
+  // scroll instead gives it somewhere real to land, so the toggle can
+  // start immediately and run *concurrently* with the scroll - it's the
+  // scrollable area's height changing out from under an in-progress
+  // scroll that caused the snap/cut-off, not the timing of the visual
+  // animation itself. The pin is released once `scrollToTopAtSpeed`
+  // reports it has actually reached 0, not a guess at how long that'll
+  // take - a guess that's too short releases the pin, and therefore the
+  // scrollable room, before a long scroll (e.g. from far down the page, or
+  // a slower mobile browser) has actually finished, which is what "doesn't
+  // fully scroll up" was.
+  const scrollToTopAndToggle = (key) => {
+    document.body.style.minHeight = `${document.documentElement.scrollHeight}px`
+    scrollToTopAtSpeed(() => {
       document.body.style.minHeight = ''
-    }, EXPAND_TRANSITION.duration * 1000 + 150)
-
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    })
     toggleCategory(key)
   }
 
@@ -283,7 +336,7 @@ export default function Gallery() {
                 <motion.button
                   type="button"
                   className="gallery-category-toggle"
-                  onClick={() => collapseCategory(key)}
+                  onClick={() => scrollToTopAndToggle(key)}
                   initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={EXPAND_TRANSITION}
@@ -321,7 +374,7 @@ export default function Gallery() {
                 </AnimatePresence>
               </div>
               {hasCategories && (
-                <button type="button" className="gallery-collapse-btn" onClick={() => collapseCategory(key)}>
+                <button type="button" className="gallery-collapse-btn" onClick={() => scrollToTopAndToggle(key)}>
                   <svg
                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
                     strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
@@ -345,7 +398,7 @@ export default function Gallery() {
                 layout
                 layoutId={`card-${key}`}
                 transition={EXPAND_TRANSITION}
-                onClick={() => toggleCategory(key)}
+                onClick={() => scrollToTopAndToggle(key)}
                 aria-expanded={false}
               >
                 <div className="gallery-stack-preview">
