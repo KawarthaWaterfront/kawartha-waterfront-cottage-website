@@ -24,8 +24,8 @@ function formatDuration(totalSeconds) {
 // separately - this repo is a static SPA with no backend of its own) that
 // holds the Google service-account credential and calls the GA4 Data API
 // server-side. The browser only ever sees the resulting JSON - summary
-// figures, top pages, locations, and traffic sources - never any Google
-// credentials.
+// figures, top pages, locations, traffic sources, and a realtime snapshot -
+// never any Google credentials.
 function useRealtimeStats(enabled) {
   const [state, setState] = useState({ status: 'idle', data: null, error: null })
 
@@ -82,12 +82,18 @@ function Section({ heading, children }) {
   )
 }
 
+const TABS = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'realtime', label: 'Realtime' },
+]
+
 // Owner-only page - not linked from the public Navbar (it's meaningless to
 // a vacation-rental guest), reachable directly at /analytics. Signed-out
 // visitors see an embedded sign-in form instead of any content.
 function AnalyticsContent() {
   const { isLoaded, isSignedIn } = useAuth()
   const stats = useRealtimeStats(isSignedIn === true)
+  const [tab, setTab] = useState('overview')
 
   if (!isLoaded) {
     return <div className="layout-wrap route-loading">Loading…</div>
@@ -107,6 +113,7 @@ function AnalyticsContent() {
   // the fetch fails), say so plainly instead of rendering a 0 that looks
   // like real data.
   const summary = stats.data?.summary
+  const realtime = stats.data?.realtime
   const hasData = typeof summary?.activeUsers === 'number'
 
   return (
@@ -131,63 +138,106 @@ function AnalyticsContent() {
 
       {hasData && (
         <>
-          <div className="analytics-hero">
-            <span className="analytics-hero-value">{compactNumber.format(summary.activeUsers)}</span>
-            <span className="analytics-hero-label">active on the site right now</span>
+          <div className="analytics-tabs" role="tablist">
+            {TABS.map(({ id, label }) => (
+              <button
+                key={id}
+                type="button"
+                role="tab"
+                aria-selected={tab === id}
+                className={`analytics-tab${tab === id ? ' analytics-tab--active' : ''}`}
+                onClick={() => setTab(id)}
+              >
+                {label}
+              </button>
+            ))}
           </div>
 
-          <div className="analytics-summary-grid">
-            <div className="analytics-summary-stat">
-              <span className="analytics-summary-value">{compactNumber.format(summary.totalUsers)}</span>
-              <span className="analytics-summary-label">total users</span>
-            </div>
-            <div className="analytics-summary-stat">
-              <span className="analytics-summary-value">{compactNumber.format(summary.screenPageViews)}</span>
-              <span className="analytics-summary-label">page views</span>
-            </div>
-            <div className="analytics-summary-stat">
-              <span className="analytics-summary-value">{formatDuration(summary.totalEngagementSeconds)}</span>
-              <span className="analytics-summary-label">engagement time</span>
-            </div>
-          </div>
+          {tab === 'overview' && (
+            <>
+              <div className="analytics-hero">
+                <span className="analytics-hero-value">{compactNumber.format(summary.activeUsers)}</span>
+                <span className="analytics-hero-label">active on the site right now</span>
+              </div>
 
-          {stats.data.pagesVisited?.length > 0 && (
-            <Section heading="Pages visited">
-              {stats.data.pagesVisited.map((p) => (
-                <StatRow
-                  key={p.pagePath}
-                  title={p.pageTitle || p.pagePath}
-                  subtitle={p.pagePath}
-                  count={p.activeUsers}
-                  metaLabel={`${compactNumber.format(p.views)} views · ${formatDuration(p.avgEngagementSeconds)} avg`}
-                />
-              ))}
-            </Section>
+              <div className="analytics-summary-grid">
+                <div className="analytics-summary-stat">
+                  <span className="analytics-summary-value">{compactNumber.format(summary.totalUsers)}</span>
+                  <span className="analytics-summary-label">total users</span>
+                </div>
+                <div className="analytics-summary-stat">
+                  <span className="analytics-summary-value">{compactNumber.format(summary.screenPageViews)}</span>
+                  <span className="analytics-summary-label">page views</span>
+                </div>
+                <div className="analytics-summary-stat">
+                  <span className="analytics-summary-value">{formatDuration(summary.totalEngagementSeconds)}</span>
+                  <span className="analytics-summary-label">engagement time</span>
+                </div>
+              </div>
+
+              {stats.data.pagesVisited?.length > 0 && (
+                <Section heading="Pages visited">
+                  {stats.data.pagesVisited.map((p) => (
+                    <StatRow
+                      key={p.pagePath}
+                      title={p.pageTitle || p.pagePath}
+                      subtitle={p.pagePath}
+                      count={p.activeUsers}
+                      metaLabel={`${compactNumber.format(p.views)} views · ${formatDuration(p.avgEngagementSeconds)} avg`}
+                    />
+                  ))}
+                </Section>
+              )}
+
+              {stats.data.locations?.length > 0 && (
+                <Section heading="Locations">
+                  {stats.data.locations.map((loc, i) => (
+                    <StatRow
+                      key={`${loc.city}-${loc.country}-${i}`}
+                      title={[loc.city, loc.country].filter(Boolean).join(', ') || 'Unknown'}
+                      count={loc.activeUsers}
+                    />
+                  ))}
+                </Section>
+              )}
+
+              {stats.data.trafficSources?.length > 0 && (
+                <Section heading="Traffic sources">
+                  {stats.data.trafficSources.map((s, i) => (
+                    <StatRow
+                      key={`${s.source}-${s.medium}-${i}`}
+                      title={`${s.source} / ${s.medium}`}
+                      count={s.activeUsers}
+                      metaLabel={`${compactNumber.format(s.sessions)} sessions`}
+                    />
+                  ))}
+                </Section>
+              )}
+            </>
           )}
 
-          {stats.data.locations?.length > 0 && (
-            <Section heading="Locations">
-              {stats.data.locations.map((loc, i) => (
-                <StatRow
-                  key={`${loc.city}-${loc.country}-${i}`}
-                  title={[loc.city, loc.country].filter(Boolean).join(', ') || 'Unknown'}
-                  count={loc.activeUsers}
-                />
-              ))}
-            </Section>
-          )}
+          {tab === 'realtime' && (
+            <>
+              <div className="analytics-hero">
+                <span className="analytics-hero-value">{compactNumber.format(realtime?.activeUsers ?? 0)}</span>
+                <span className="analytics-hero-label">active on the site right now</span>
+              </div>
 
-          {stats.data.trafficSources?.length > 0 && (
-            <Section heading="Traffic sources">
-              {stats.data.trafficSources.map((s, i) => (
-                <StatRow
-                  key={`${s.source}-${s.medium}-${i}`}
-                  title={`${s.source} / ${s.medium}`}
-                  count={s.activeUsers}
-                  metaLabel={`${compactNumber.format(s.sessions)} sessions`}
-                />
-              ))}
-            </Section>
+              {realtime?.pages?.length > 0 ? (
+                <Section heading="Pages right now">
+                  {realtime.pages.map((p, i) => (
+                    <StatRow
+                      key={`${p.page}-${i}`}
+                      title={p.page}
+                      count={p.activeUsers}
+                      metaLabel={`${compactNumber.format(p.views)} views`}
+                    />
+                  ))}
+                </Section>
+              ) : (
+                <p className="analytics-placeholder">No active pages right now.</p>
+              )}
+            </>
           )}
 
           <button type="button" className="analytics-refresh-btn" onClick={stats.refresh}>

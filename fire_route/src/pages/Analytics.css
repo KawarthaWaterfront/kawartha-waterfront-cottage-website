@@ -30,6 +30,35 @@
   margin: 0 auto;
 }
 
+.analytics-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 0 28px;
+}
+
+.analytics-tab {
+  padding: 6px 18px;
+  border-radius: 20px;
+  border: 1px solid var(--border-strong);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+
+  &:hover {
+    background: var(--sage-100);
+  }
+}
+
+.analytics-tab--active {
+  background: var(--sage-100);
+  color: var(--text-heading);
+  border-color: var(--text-heading);
+}
+
 /* Hero figure: the one number this page leads with. Sans, not the brand's
    serif display/body faces - a stat value is data, not editorial type -
    and proportional (not tabular) figures, since this is a standalone big
