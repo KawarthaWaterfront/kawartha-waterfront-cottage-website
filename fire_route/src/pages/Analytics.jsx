@@ -31,8 +31,11 @@ function AnalyticsContent() {
         <UserButton afterSignOutUrl="/" />
       </div>
       <p className="analytics-placeholder">
-        You're signed in. Site performance and traffic data lives in the AWS CloudWatch RUM
-        console for now - this page is a placeholder for pulling that in directly.
+        You're signed in. Site traffic data lives in{' '}
+        <a href="https://analytics.google.com/" target="_blank" rel="noreferrer">
+          Google Analytics
+        </a>{' '}
+        for now - this page is a placeholder for pulling that in directly.
       </p>
       <Footer />
     </div>
@@ -44,8 +47,7 @@ function AnalyticsContent() {
 // main.jsx - this file is already its own lazily-loaded chunk (see
 // App.jsx), so keeping ClerkProvider inside it keeps Clerk's weight out of
 // the bundle every other page has to download too, the same way Gallery's
-// Motion dependency and the AWS RUM client are both scoped to just where
-// they're actually used.
+// Motion dependency was scoped to just where it's actually used.
 export default function Analytics() {
   return (
     <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY}>

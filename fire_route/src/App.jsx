@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom'
 import './App.css'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
+import { trackPageView } from './analytics'
 
 // Every other page - and everything they import (Gallery alone pulls in
 // the Motion animation library) - used to be bundled eagerly into the same
@@ -20,22 +21,14 @@ export default function App() {
   const location = useLocation()
 
   useEffect(() => {
-    // This is a single-page app (client-side routing via BrowserRouter) - AWS
-    // RUM's automatic tracking only ever sees the one real page load, with
-    // no way to know a route change even happened. Recording a page view
-    // on every path change is what makes per-page performance/analytics
-    // show up correctly in RUM instead of everything being attributed to
-    // whatever route happened to be loaded first.
-    //
-    // `./rum.js` is dynamically imported (rather than a static import) so
-    // this doesn't force the ~85KB RUM client into App's own bundle -
-    // main.jsx already triggers that same import on idle, and since
-    // dynamic imports of the same specifier are cached by the module
-    // system, this reuses that one already-initialized instance rather
-    // than constructing a second client.
-    import('./rum.js').then(({ default: awsRum }) => {
-      awsRum?.recordPageView(location.pathname)
-    })
+    // This is a single-page app (client-side routing via BrowserRouter) -
+    // GA's own automatic pageview only ever fires for the one real page
+    // load (send_page_view is off in index.html specifically because of
+    // this), with no way to know a route change happened afterward.
+    // Recording a page_view event on every path change - including the
+    // first one - is what makes GA attribute traffic to the actual page
+    // visited instead of everything showing up as the landing route.
+    trackPageView(location.pathname)
   }, [location.pathname])
 
   return (

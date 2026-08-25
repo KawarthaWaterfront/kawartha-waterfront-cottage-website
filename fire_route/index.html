@@ -33,6 +33,24 @@
     <link rel="preload" href="/fonts/marcellus-v14-latin-regular.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/lora-v37-latin-regular.woff2" as="font" type="font/woff2" crossorigin />
     <title>Kawartha Waterfront Cottage</title>
+    <!-- Google Analytics (GA4). gtag.js is `async` (non-blocking, loaded in
+         parallel) and isn't an npm dependency at all, so unlike aws-rum-web
+         before it there's no JS bundle weight to defer here.
+         send_page_view is turned off in the config call below - this is an
+         SPA (client-side routing), so App.jsx fires its own page_view event
+         on every route change (including the first one) via
+         src/analytics.js instead, rather than letting gtag fire one
+         automatically only for this initial real page load and then never
+         again on navigation. %VITE_GA_MEASUREMENT_ID% is replaced with the
+         matching .env value at build time (Vite's own HTML env
+         substitution) - see .env for the placeholder to fill in. -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=%VITE_GA_MEASUREMENT_ID%"></script>
+    <script>
+      window.dataLayer = window.dataLayer || []
+      function gtag() { dataLayer.push(arguments) }
+      gtag('js', new Date())
+      gtag('config', '%VITE_GA_MEASUREMENT_ID%', { send_page_view: false })
+    </script>
   </head>
   <body>
     <div id="root"></div>
