@@ -13,6 +13,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@clerk/react": "^6.14.7",
     "aws-rum-react": "^2.0.5",
     "aws-rum-web": "^3.2.1",
     "motion": "^13.1.0",

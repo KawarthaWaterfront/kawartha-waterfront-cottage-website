@@ -14,6 +14,7 @@ const IGuide = lazy(() => import('./pages/IGuide'))
 const Gallery = lazy(() => import('./pages/Gallery'))
 const Amenities = lazy(() => import('./pages/Amenities'))
 const Activities = lazy(() => import('./pages/Activities'))
+const Analytics = lazy(() => import('./pages/Analytics'))
 
 export default function App() {
   const location = useLocation()
@@ -49,6 +50,7 @@ export default function App() {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/amenities" element={<Amenities />} />
           <Route path="/activities" element={<Activities />} />
+          <Route path="/analytics" element={<Analytics />} />
         </Routes>
       </Suspense>
     </>
