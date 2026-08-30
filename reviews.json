@@ -4,7 +4,7 @@
     "https://www.airbnb.ca/rooms/1331967211097025994",
     "https://www.vrbo.com/en-ca/cottage-rental/p20158487"
   ],
-  "scrapedAt": "2026-08-02T02:32:39.150171+00:00",
+  "scrapedAt": "2026-08-30T03:33:06.257314+00:00",
   "aggregate": {
     "rating": 5.0,
     "count": 3
@@ -77,13 +77,20 @@
       "include": true
     },
     {
+      "source": "airbnb",
+      "id": "1757468499896288070",
+      "author": "Geoff",
+      "rating": 5,
+      "text": "Everything was what we expected.  The couple of questions we had were answered very quickly.",
+      "date": "August 2026"
+    },
+    {
       "source": "vrbo",
       "id": "6a385fdd668f09050fe32b71",
       "author": "murray p.",
       "rating": 5.0,
       "text": "This vacation rental certainly checked all of the boxes for our multi-generational family group.  Accommodations were excellent and the hosts provided lots of games, indoor and outdoor toys, books and puzzles so all ages were kept active, regardless of the weather.  Highly recommend this rental for a family vacation or a group of friends.",
-      "date": "June 2026",
-      "include": true
+      "date": "June 2026"
     },
     {
       "source": "vrbo",
@@ -91,8 +98,7 @@
       "author": "Karen T.",
       "rating": 5.0,
       "text": "Stayed with the family for 4 nights at this beautiful and very clean lakefront cottage.  There were many updates (kitchen, bathrooms, etc.), while still maintaining a lovely cottage-y vibe.  Close to the boat launch.  Kim is a great host - very communicative and detailed.",
-      "date": "July 2025",
-      "include": true
+      "date": "July 2025"
     },
     {
       "source": "vrbo",
@@ -100,8 +106,7 @@
       "author": "Michael R.",
       "rating": 5.0,
       "text": "A great combination of a very friendly and communicative host, and a wonderful cottage and location. The lake views, and the soaring ceilings of the great room were spectacular. The beautiful cottage has all you need to enjoy and is very roomy, the location comes with lots of privacy and quiet. That panoramic lake view is really something to see. I cant wait to get back here again, thanks so much for everything Kim.",
-      "date": "September 2025",
-      "include": true
+      "date": "September 2025"
     },
     {
       "source": "vrbo",
@@ -109,8 +114,7 @@
       "author": "Wendy N.",
       "rating": 5.0,
       "text": "Everything was just like it was in the description and photos.  The home was very clean and the host was very easy to contact.  My family stayed here for one week and we all enjoyed our time and the grandkids loved the lake toys and games that were available.  It has a beautiful view and right  on Pigeon lake.  Having the full kitchen with a dishwasher and laundry facilities was great for a large family.  Sitting under the front porch was one of our favourite things and enjoying the beautiful views and the sounds of the waves and calmness of the water first thing in the morning.",
-      "date": "July 2026",
-      "include": true
+      "date": "July 2026"
     },
     {
       "source": "vrbo",
@@ -118,8 +122,23 @@
       "author": "Sarah K.",
       "rating": 5.0,
       "text": "My family and I stayed for 3nights, was a beautiful place and kim was great!",
-      "date": "July 2025",
-      "include": true
+      "date": "July 2025"
+    },
+    {
+      "source": "vrbo",
+      "id": "6a70f275f7eaaa04f088ff14",
+      "author": "Cheryl R.",
+      "rating": 5.0,
+      "text": "Everyone had a wonderful time!!! Thank you for allowing our family to enjoy an amazing time together. It is very rare that we can all be together for a week.",
+      "date": "July 2026"
+    },
+    {
+      "source": "vrbo",
+      "id": "6a7b1a479cb4b601078a1ee3",
+      "author": "Heather F.",
+      "rating": 5.0,
+      "text": "A beautiful place to spend some family time. Inside, the cottage is unique and very attractive. Lots of space for guests to lounge or play inside and out. Everything we needed was there. Pigeon Lake is a big lake—perfect for watersports! Also, the host had lots of information about the what to do in the area. So glad we found this place!",
+      "date": "August 2026"
     }
   ]
 }
