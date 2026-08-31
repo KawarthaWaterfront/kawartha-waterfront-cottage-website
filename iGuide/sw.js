@@ -13,8 +13,8 @@
 // loader...) - which matters since that's third-party minified code this
 // project doesn't control and hasn't fully reverse-engineered.
 const IGUIDE_TILE_PREFIX = 'https://d13umf114s6tcz.cloudfront.net/iGuide-assets/'
-// Underscored, matching the actual S3 key prefix (fire-route-bucket/old_iGuide_assets/)
-// - not the hyphenated guess this originally shipped with.
+// Hyphenated, matching the S3 key prefix (fire-route-bucket/old-iGuide-assets/) -
+// the folder was renamed to this from old_iGuide_assets/ (underscored).
 const OLD_TOUR_ASSETS_BASE = 'https://dqcnq5a81vup8.cloudfront.net/old-iGuide-assets/'
 
 self.addEventListener('install', () => {
