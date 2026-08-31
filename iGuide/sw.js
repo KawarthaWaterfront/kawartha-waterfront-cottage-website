@@ -15,7 +15,7 @@
 const IGUIDE_TILE_PREFIX = 'https://d13umf114s6tcz.cloudfront.net/iGuide-assets/'
 // Underscored, matching the actual S3 key prefix (fire-route-bucket/old_iGuide_assets/)
 // - not the hyphenated guess this originally shipped with.
-const OLD_TOUR_ASSETS_BASE = 'https://dqcnq5a81vup8.cloudfront.net/old_iGuide_assets/'
+const OLD_TOUR_ASSETS_BASE = 'https://dqcnq5a81vup8.cloudfront.net/old-iGuide-assets/'
 
 self.addEventListener('install', () => {
   self.skipWaiting()
