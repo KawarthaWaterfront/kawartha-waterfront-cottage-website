@@ -1,0 +1,30 @@
+.archived-tour-page--signed-out {
+  align-items: center;
+  text-align: center;
+  padding: 40px 32px 64px;
+}
+
+.archived-tour-signin-prompt {
+  color: var(--text-muted);
+  margin: 0 0 28px;
+}
+
+/* Full-bleed, same treatment as the live tour's .iguide-frame (App.css) -
+   a 3D viewer wants the whole available viewport, not .layout-wrap's
+   1126px max width. */
+.archived-tour-page--signed-in {
+  position: relative;
+  display: flex;
+  flex: 1;
+}
+
+/* Floats above the iframe rather than sharing a header row with it, so the
+   tour keeps the full-bleed space Analytics.jsx's stats page doesn't need.
+   Bottom-right, not top - the tour's own fullscreen (top-left) and menu
+   (top-right) buttons already own both top corners. */
+.archived-tour-user-button {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 20;
+}

@@ -118,6 +118,10 @@ def parse_cottagesincanada_reviews(html):
                 "rating": float(rating_el["content"]) if rating_el and rating_el.has_attr("content") else None,
                 "text": body_el.get_text(strip=True) if body_el else None,
                 "date": date_el.get_text(strip=True) if date_el else None,
+                # New reviews start hidden until a human reviews and
+                # curates them in - see merge_reviews, which preserves
+                # whatever this ends up set to on later reruns.
+                "include": False,
             }
         )
 
@@ -185,6 +189,10 @@ def fetch_airbnb_reviews(since_date=None):
                 "rating": item.get("rating"),
                 "text": item.get("text"),
                 "date": iso_to_month_year(item.get("createdAt")),
+                # New reviews start hidden until a human reviews and
+                # curates them in - see merge_reviews, which preserves
+                # whatever this ends up set to on later reruns.
+                "include": False,
             }
         )
     return reviews
@@ -229,6 +237,10 @@ def fetch_vrbo_reviews(max_attempts=3):
                 "rating": rating_5,
                 "text": item.get("reviewText"),
                 "date": extract_month_year(item.get("stayedText")),
+                # New reviews start hidden until a human reviews and
+                # curates them in - see merge_reviews, which preserves
+                # whatever this ends up set to on later reruns.
+                "include": False,
             }
         )
     return reviews
@@ -240,20 +252,43 @@ def load_existing():
     return json.loads(OUTPUT_PATH.read_text(encoding="utf-8"))
 
 
-def merge_reviews_by_id(existing_data, new_reviews, source):
-    """Apify actors only return what they were asked to fetch this run (e.g.
-    Airbnb's `sinceDate`, or VRBO's `maxItems` cutoff), so previously-fetched
-    reviews for `source` have to be carried forward here rather than
-    re-fetched every time."""
-    by_id = {}
+def merge_reviews(existing_data, new_reviews, source, key_fn):
+    """Merges freshly-scraped `new_reviews` for `source` with whatever was
+    already on disk, keyed by `key_fn` (Airbnb/VRBO's own review id;
+    cottagesincanada has no id at all, so it's matched on content instead -
+    see main()).
+
+    Two things this preserves across reruns:
+    - The `include` curation flag. A freshly-scraped copy of a review
+      already on disk always starts as `include: False` (see
+      parse_cottagesincanada_reviews / fetch_airbnb_reviews /
+      fetch_vrbo_reviews) - without this, a review a human had already
+      reviewed and turned on would silently flip back off the next time
+      the scraper happened to see it again.
+    - Reviews this run didn't return at all. Apify actors only return what
+      they were asked to fetch this run (e.g. Airbnb's `sinceDate`, or a
+      VRBO run that just didn't resurface an older review), so anything
+      previously fetched for `source` is carried forward rather than
+      dropped.
+    """
+    existing_by_key = {}
     if existing_data:
         for r in existing_data.get("reviews", []):
-            if r.get("source") == source and r.get("id"):
-                by_id[r["id"]] = r
+            if r.get("source") == source:
+                key = key_fn(r)
+                if key is not None:
+                    existing_by_key[key] = r
+
+    merged_by_key = dict(existing_by_key)
     for r in new_reviews:
-        if r.get("id"):
-            by_id[r["id"]] = r
-    return list(by_id.values())
+        key = key_fn(r)
+        if key is None:
+            continue
+        existing = existing_by_key.get(key)
+        if existing is not None:
+            r["include"] = existing.get("include", r.get("include", False))
+        merged_by_key[key] = r
+    return list(merged_by_key.values())
 
 
 def main():
@@ -268,13 +303,21 @@ def main():
         since_date = existing_data["scrapedAt"][:10]
 
     html = fetch_html(COTTAGESINCANADA_URL)
-    aggregate, cottage_reviews = parse_cottagesincanada_reviews(html)
+    aggregate, cottage_reviews_scraped = parse_cottagesincanada_reviews(html)
 
-    airbnb_reviews = merge_reviews_by_id(
-        existing_data, fetch_airbnb_reviews(since_date), "airbnb"
+    # cottagesincanada's markup has no per-review id, so reviews are matched
+    # on content instead to preserve their "include" curation across reruns.
+    cottage_reviews = merge_reviews(
+        existing_data,
+        cottage_reviews_scraped,
+        "cottagesincanada",
+        key_fn=lambda r: (r.get("author"), r.get("date"), r.get("text")),
     )
-    vrbo_reviews = merge_reviews_by_id(
-        existing_data, fetch_vrbo_reviews(), "vrbo"
+    airbnb_reviews = merge_reviews(
+        existing_data, fetch_airbnb_reviews(since_date), "airbnb", key_fn=lambda r: r.get("id")
+    )
+    vrbo_reviews = merge_reviews(
+        existing_data, fetch_vrbo_reviews(), "vrbo", key_fn=lambda r: r.get("id")
     )
 
     reviews = cottage_reviews + airbnb_reviews + vrbo_reviews

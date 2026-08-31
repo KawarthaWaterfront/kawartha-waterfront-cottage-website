@@ -16,6 +16,7 @@ const Gallery = lazy(() => import('./pages/Gallery'))
 const Amenities = lazy(() => import('./pages/Amenities'))
 const Activities = lazy(() => import('./pages/Activities'))
 const Analytics = lazy(() => import('./pages/Analytics'))
+const ArchivedTour = lazy(() => import('./pages/ArchivedTour'))
 
 // index.html's static <title> only ever covers the initial load - once
 // BrowserRouter swaps routes client-side, the tab/bookmark/history-entry
@@ -31,6 +32,7 @@ const PAGE_TITLES = {
   '/iguide': `3D Tour | ${SITE_NAME}`,
   '/gallery': `Gallery | ${SITE_NAME}`,
   '/analytics': `Analytics | ${SITE_NAME}`,
+  '/aug152024': `Archived Tour | ${SITE_NAME}`,
 }
 
 export default function App() {
@@ -62,6 +64,7 @@ export default function App() {
           <Route path="/amenities" element={<Amenities />} />
           <Route path="/activities" element={<Activities />} />
           <Route path="/analytics" element={<Analytics />} />
+          <Route path="/aug152024" element={<ArchivedTour />} />
         </Routes>
       </Suspense>
     </>
