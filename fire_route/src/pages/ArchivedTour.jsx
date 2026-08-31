@@ -9,7 +9,7 @@ const CLERK_PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 // public/old_iGuide/ - see public/iGuide/old-tour.html (the property data
 // for this archived scan, converted into that bundle's expected format)
 // and public/iGuide/sw.js (redirects that bundle's hardcoded live-tour
-// CloudFront tile URLs to this scan's own old-iGuide-assets/ bucket
+// CloudFront tile URLs to this scan's own old_iGuide_assets/ bucket
 // instead, without touching the shared, third-party bundle itself).
 const TOUR_SRC = `${import.meta.env.BASE_URL}iGuide/old-tour.html`
 
