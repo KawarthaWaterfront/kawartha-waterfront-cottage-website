@@ -205,22 +205,39 @@ def fetch_vrbo_reviews(max_attempts=3):
 
     # VRBO blocks direct/datacenter requests with a bot-detection challenge
     # (HTTP 429) - the actor's default proxyConfiguration has useApifyProxy
-    # off, so it needs to be turned on explicitly to get through.
+    # off, so it needs to be turned on explicitly to get through. maxItems is
+    # set explicitly (well above any real review count for this listing)
+    # rather than left to the actor's own undocumented default for an
+    # omitted value - the actor's docs describe it as "paginate until the
+    # end or maxItems" but don't say what an omitted maxItems falls back to.
     run_input = {
         "searchUrl": VRBO_LISTING_URL,
+        "maxItems": 200,
         "proxyConfiguration": {"useApifyProxy": True, "apifyProxyGroups": ["RESIDENTIAL"]},
     }
 
     # Even through the residential proxy, VRBO intermittently blocks the
-    # actor's navigation entirely (run still reports SUCCEEDED, just with 0
-    # items) - retry a few times rather than treating one empty run as "no
-    # reviews".
-    items = []
+    # actor's navigation *partway through* rather than failing outright -
+    # confirmed directly against the live listing, which reports "See all 8
+    # verified reviews" while a single run here returned only 7. A run can
+    # report SUCCEEDED with a nonempty-but-incomplete set, so stopping at
+    # the first nonempty attempt (as this used to) can silently lock in a
+    # partial result. Instead, every attempt's reviews are merged by
+    # reviewId and the union is kept - a review any single attempt manages
+    # to catch is kept even if a later attempt misses it again.
+    by_id = {}
     for attempt in range(1, max_attempts + 1):
         items = run_apify_actor(APIFY_VRBO_ACTOR, run_input)
-        if items:
-            break
-        print(f"VRBO actor returned 0 reviews on attempt {attempt}/{max_attempts}; retrying.")
+        new_ids = [item.get("reviewId") for item in items if item.get("reviewId") not in by_id]
+        for item in items:
+            rid = item.get("reviewId")
+            if rid is not None:
+                by_id[rid] = item
+        print(
+            f"VRBO actor attempt {attempt}/{max_attempts}: {len(items)} reviews "
+            f"({len(new_ids)} new, {len(by_id)} total so far)."
+        )
+    items = list(by_id.values())
 
     reviews = []
     for item in items:
