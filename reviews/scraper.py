@@ -205,15 +205,23 @@ def fetch_vrbo_reviews(max_attempts=3):
 
     # VRBO blocks direct/datacenter requests with a bot-detection challenge
     # (HTTP 429) - the actor's default proxyConfiguration has useApifyProxy
-    # off, so it needs to be turned on explicitly to get through. maxItems is
-    # set explicitly (well above any real review count for this listing)
-    # rather than left to the actor's own undocumented default for an
-    # omitted value - the actor's docs describe it as "paginate until the
-    # end or maxItems" but don't say what an omitted maxItems falls back to.
+    # off, so it needs to be turned on explicitly to get through. Pinned to
+    # Canadian residential exit IPs (apifyProxyCountry) - this is a .ca
+    # listing (en-ca URL), so a CA IP matches what a real guest browsing it
+    # would look like, rather than Apify's residential pool picking an
+    # arbitrary country. maxItems is set explicitly (well above any real
+    # review count for this listing) rather than left to the actor's own
+    # undocumented default for an omitted value - the actor's docs describe
+    # it as "paginate until the end or maxItems" but don't say what an
+    # omitted maxItems falls back to.
     run_input = {
         "searchUrl": VRBO_LISTING_URL,
         "maxItems": 200,
-        "proxyConfiguration": {"useApifyProxy": True, "apifyProxyGroups": ["RESIDENTIAL"]},
+        "proxyConfiguration": {
+            "useApifyProxy": True,
+            "apifyProxyGroups": ["RESIDENTIAL"],
+            "apifyProxyCountry": "CA",
+        },
     }
 
     # Even through the residential proxy, VRBO intermittently blocks the
